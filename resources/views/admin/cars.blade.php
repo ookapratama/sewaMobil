@@ -50,11 +50,9 @@
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </form>
-                                        <a onclick="editForm({{ $data->id }})" class="">
-                                            <button type="button" class="btn btn-primary">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </button>
-                                        </a>
+                                        <button type="button" value="{{ $data->id }}" class="btn editBtn btn-primary">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </button>
                                     </th>
                                 </tr>
                             @endforeach
@@ -108,7 +106,7 @@
         </div>
 
         {{-- modal edit --}}
-        <div class="modal_edit fade" id="verticalycentered edit{{ $data->id }} " tabindex="-1">
+        <div class="modal fade" id="editModal" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -118,18 +116,19 @@
                     <form action="{{ route('cars.update') }}" method="post" id="editForm" enctype="multipart/form-data">
                         {{ method_field('put') }}
                         @csrf
+                        <input type="hidden" name="id" id="id">
                         <div class="modal-body">
                             <div class="mb-3">
                                 <div class="col-md-12">
                                     <label for="name">Armada Name</label>
-                                    <input type="text" name="name" class="form-control" id="name"
+                                    <input type="text" name="name" class="form-control" id="name_old"
                                         placeholder="Masukan Nama Armada.." required>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <div class="col-md-12">
                                     <label for="address">Price</label>
-                                    <input name="price" class="form-control" id="price"
+                                    <input name="price" class="form-control" id="price_old"
                                         placeholder="Masukan Harga.." required></input>
                                 </div>
                             </div>
@@ -137,7 +136,7 @@
                                 <div class="col-md-12">
                                     <label for="email">Picture</label>
                                     <input type="file" name="picture_url" id="picture" class="form-control"
-                                        placeholder="Upload Picture" required>
+                                        placeholder="Upload Picture" >
                                     <input type="hidden" name="picture_old" id="picture_old">
                                 </div>
                                 <div class="form-row text-center">
@@ -155,8 +154,36 @@
                 </div>
             </div>
         </div>
+
     </section>
-    <script type="text/script"></script>
+    
+@endsection
+
+@section('script')
+<script>
+    $(document).ready(function() {
+        $(document).on('click', '.editBtn', function() {
+            var id = $(this).val();
+            // alert(id);
+            $('#editModal').modal('show');
+
+            $.ajax({
+                type: "GET",
+                url: "/cars/edit/"+id,
+                success : function (response) {
+                    console.log(response.car.picture_url);
+                    $('#name_old').val(response.car.name);
+                    $('#price_old').val(response.car.price);
+                    $('#picture_old').val(response.car.picture_url);
+                    $('#id').val(id);
+                    $('#showImage').attr('src', "{{ asset('image/cars') }}/" + response.car.picture_url);
+                }
+            });
+
+        });
+    });
+</script>
+
 @endsection
 
 @push('addon-style')

@@ -87,7 +87,10 @@ class ArmadaController extends Controller
     public function edit($id)
     {
         $car = Armada::find($id);
-           
+        return response()->json([
+            'car' => $car,
+            'status' => 200
+        ]);
     }
 
     /**
@@ -97,9 +100,22 @@ class ArmadaController extends Controller
      * @param  \App\Models\armada  $armada
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatearmadaRequest $request, armada $armada)
+    public function update(UpdatearmadaRequest $request)
     {
-        //
+        $data = $request->all();
+        $find =  Armada::find($request->id);
+        // dd($find->picture_url);
+        if ($request->picture_url != $find->picture_url) {
+            
+            $nama = time() . '.' . $request->picture_url->extension();
+            // dd($nama);
+            $data['picture_url'] = $nama;
+        }
+        $request->picture_url->move(public_path('image/cars/'), $nama);
+
+        $find->update($data);
+        // dd($request);
+        return redirect()->route('cars.index');
     }
 
     /**

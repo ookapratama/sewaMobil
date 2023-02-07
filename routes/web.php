@@ -114,7 +114,7 @@ Route::group(['prefix' => '', 'namespace' => 'App\Http\Controllers'], function (
     Route::group(['prefix' => '/cars'], function() {
         Route::get('/', [ArmadaController::class, 'indexCars'])->name('cars.index');
         Route::post('/store', [ArmadaController::class, 'store'])->name('cars.store');
-        Route::get('/edit', [ArmadaController::class, 'edit'])->name('cars.edit');
+        Route::get('/edit/{id}', [ArmadaController::class, 'edit'])->name('cars.edit');
         Route::put('/update', [ArmadaController::class, 'update'])->name('cars.update');
         Route::delete('/destroy/{id}', [ArmadaController::class, 'destroy'])->name('cars.destroy');
 
