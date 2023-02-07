@@ -12,7 +12,8 @@ class Armada extends Model
     protected $fillable = [
         'name',
         'price',
-        'plat'
+        'plat',
+        'picture_url'
     ];
 
     public function latestTransaction()

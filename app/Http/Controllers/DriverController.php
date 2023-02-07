@@ -41,7 +41,11 @@ class DriverController extends Controller
      */
     public function store(StoredriverRequest $request)
     {
-        //
+        $data = $request->all();
+        
+        driver::create($data);
+        // dd($request);
+        return redirect()->route('driver.index');
     }
 
     /**
@@ -84,8 +88,10 @@ class DriverController extends Controller
      * @param  \App\Models\driver  $driver
      * @return \Illuminate\Http\Response
      */
-    public function destroy(driver $driver)
+    public function destroy($id)
     {
-        //
+        $find = driver::find($id);
+        $find->delete();
+        return redirect()->route('driver.index');  
     }
 }

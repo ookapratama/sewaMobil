@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SignupController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -107,10 +108,32 @@ Route::get('/transaction-detail', function () {
     ]);
 });
 
-Route::get('/cars', [ArmadaController::class, 'indexCars'])->name('cars');
+
+Route::group(['prefix' => '', 'namespace' => 'App\Http\Controllers'], function () {
+    
+    Route::group(['prefix' => '/cars'], function() {
+        Route::get('/', [ArmadaController::class, 'indexCars'])->name('cars.index');
+        Route::post('/store', [ArmadaController::class, 'store'])->name('cars.store');
+        Route::get('/edit', [ArmadaController::class, 'edit'])->name('cars.edit');
+        Route::put('/update', [ArmadaController::class, 'update'])->name('cars.update');
+        Route::delete('/destroy/{id}', [ArmadaController::class, 'destroy'])->name('cars.destroy');
+
+    });
+});
+
+Route::group(['prefix' => '', 'namespace' => 'App\Http\Controllers'], function () {
+    
+    Route::group(['prefix' => '/driver'], function() {
+        Route::get('/', [DriverController::class, 'index'])->name('driver.index');
+        Route::post('/store', [DriverController::class, 'store'])->name('driver.store');
+        Route::put('/update', [DriverController::class, 'update'])->name('driver.update');
+        Route::delete('/destroy/{id}', [DriverController::class, 'destroy'])->name('driver.destroy');
+
+    });
+});
 
 
-Route::get('/driver', [DriverController::class, 'index']);
+// Route::get('/driver', [DriverController::class, 'index']);
 
 // Route::get('/driver', function () {
 //     return view('/admin/driver', [

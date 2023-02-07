@@ -27,11 +27,12 @@ class ArmadaController extends Controller
     public function indexcars()
     {
         $armadas = Armada::all();
+        $data = array(
+            "title"     => "Cars",
+            'armadas'   => $armadas
+        );
 
-        return view('/admin/cars', [
-            "title" => "Cars",
-            "armadas" => $armadas
-        ]);
+        return view('/admin/cars', $data);
     }
 
     /**
@@ -52,7 +53,17 @@ class ArmadaController extends Controller
      */
     public function store(StorearmadaRequest $request)
     {
-        //
+        $data = $request->all();
+        
+        // $picture = $request->file('picture_url');
+        $nama = time() . '.' . $request->picture_url->extension();
+        // dd($nama);
+        $request->picture_url->move(public_path('image/cars/'), $nama);
+        $data['picture_url'] = $nama;
+
+        Armada::create($data);
+        // dd($request);
+        return redirect()->route('cars.index');
     }
 
     /**
@@ -73,9 +84,10 @@ class ArmadaController extends Controller
      * @param  \App\Models\armada  $armada
      * @return \Illuminate\Http\Response
      */
-    public function edit(armada $armada)
+    public function edit($id)
     {
-        //
+        $car = Armada::find($id);
+           
     }
 
     /**
@@ -96,8 +108,10 @@ class ArmadaController extends Controller
      * @param  \App\Models\armada  $armada
      * @return \Illuminate\Http\Response
      */
-    public function destroy(armada $armada)
+    public function destroy($id)
     {
-        //
+        $find = Armada::find($id);
+        $find->delete();
+        return redirect()->route('cars.index');  
     }
 }
