@@ -19,7 +19,9 @@
                         </p>
                         <p class="product-price"> Rp. {{ number_format($data->price, 0, ',', '.') }} </p>
                         <div class="btn-wrapper"> <button type="button" data-bs-toggle="modal"
-                                data-bs-target="#scrollingModal" class="btn btn-add-to-cart"> Pesan</button></div>
+                                data-bs-target="#scrollingModal"
+                                class="btn {{ $data->status == 'booked' ? 'disabled' : '' }} btn-add-to-cart">
+                                Pesan</button></div>
                     </div>
                 @endforeach
             </div>
@@ -40,7 +42,8 @@
                             <div class="mb-6">
                                 <div class="col-md-12">
                                     <label for="start-date">Nama Lengkap</label>
-                                    <input type="text" placeholder="Nama Lengkap..." name="fullname" class="form-control">
+                                    <input type="text" placeholder="Nama Lengkap..." name="fullname"
+                                        class="form-control">
                                 </div>
                             </div>
 
@@ -50,8 +53,8 @@
 
                                 <div class="col-sm-12">
                                     <select name="armada_id" class="form-control selectx">
+                                        <option value=""> Pilih Armada </option>
                                         @foreach ($armadas as $item)
-                                            <option value=""> Pilih Armada </option>
                                             <option value="{{ $item->id }}"> {{ $item->name }} </option>
                                         @endforeach
                                         {{-- @foreach ($armadas as $armada)
@@ -64,7 +67,7 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                                
+
                                 {{-- <input type="hidden" value="" name="bookingcode"> --}}
 
                                 <div class="mb-6">
@@ -120,7 +123,8 @@
                                 <div class="mb-6">
                                     <div class="col-md-12">
                                         <label for="sim">SIM</label>
-                                        <input type="file" name="sim" class="form-control" placeholder="Upload..">
+                                        <input type="file" name="sim" class="form-control"
+                                            placeholder="Upload..">
                                     </div>
                                 </div>
 
@@ -128,7 +132,7 @@
                                     <label for="armada_id" class="col-sm-3 col-form-label">Supir</label>
                                     <div class="col-sm-12">
                                         <select name="pengantaran" class="form-control selectx">
-                                            <option value="Lepas kunci">Lepas Kunci</option>
+                                            <option value="self pick-up">Lepas Kunci</option>
                                             <option value="Delivery">Delivery</option>
                                         </select>
                                     </div>

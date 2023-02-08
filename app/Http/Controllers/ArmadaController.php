@@ -16,13 +16,18 @@ class ArmadaController extends Controller
      */
     public function index()
     {
-        $armadas = Armada::all();
+        $armadas = Armada::where('status', 'available')->get();
 
         return view('katalog', [
             "title" => "Katalog",
             "armadas" => $armadas
         ]);
     }
+
+    // public function indexKatalog() 
+    // {
+    //     $armada = Armada::where()
+    // }
 
     public function indexcars()
     {

@@ -25,12 +25,12 @@ return new class extends Migration
             $table->date('end_date');
             $table->text('alamat')->nullable();
             $table->integer('durasi_sewa');
-            $table->integer('dp_invoice')->nullable();
             $table->enum('status', ['pending','success','completed']) -> default('pending');
             $table->enum('supir', ['tanpa supir','dalam kota','luar kota']) -> default('tanpa supir');
             $table->enum('pengantaran', ['self pick-up','Delivery']) -> default('self pick-up');
-            $table->binary('ktp')->nullable();
-            $table->binary('sim')->nullable();
+            $table->string('dp_invoice')->nullable();
+            $table->string('ktp')->nullable();
+            $table->string('sim')->nullable();
 
             $table->timestamps();
         });

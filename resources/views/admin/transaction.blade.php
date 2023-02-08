@@ -6,8 +6,7 @@
             <div class="card top-selling overflow-auto">
                 <div class="card-body pb-0">
                     <h5 class="card-title">Transaction List <span>|
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#scrollingModal"> Tambah Data </button>
+                            
                     </h5>
                     <table class="table table-borderless datatable">
                         <thead>
@@ -19,6 +18,7 @@
                                 <th scope="col">Armada</th>
                                 <th scope="col">Grand Total</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -28,9 +28,31 @@
                                     <td>{{ $data->fullname }}</td>
                                     <td>{{ $data->start_date }} </a></td>
                                     <td>{{ $data->end_date }}</td>
-                                    <td>{{ $data->armada_id }}</td>
-                                    <td>{{ $data->total }} </td>
-                                    <td><span class="badge bg-primary rounded">{{ $data->status }}</span></td>
+                                    <td>{{ $data->armada->name }}</td>
+                                    <td>Rp. {{ number_format($data->armada->price, 0, ',', '.') }} </td>
+                                    <td><span class="badge bg-{{ $data->status == 'success' ? 'success' : 'primary'}} rounded">{{ $data->status }}</span></td>
+                                    <td>
+                                        <div class="d-flex">
+
+                                            <form class="me-2" action="{{ route('transaksi.destroy', ['id1'=>$data->id,'id2'=>$data->armada->id] ) }} "
+                                                method="post">
+                                                {{ method_field('delete') }}
+                                                @csrf
+                                                <input type="hidden" name="armada_id" value="{{ $data->armada->id }}">
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                            <button type="button" value="{{ $data->id }}"
+                                                class="btn me-2 editBtn btn-primary">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </button>
+                                            <a href="{{ route('transaksi.detail', $data->id) }}"
+                                                class="btn {{ $data->status == 'success' ? 'disabled' : '' }} btn-warning">
+                                                Proses bayar
+                                            </a>
+                                        </div>
+                                    </td>
                                     {{-- {{ $data -> status == 'success' ? 'bg-success' : 'bg-warning' }} --}}
                                 </tr>
                             @endforeach

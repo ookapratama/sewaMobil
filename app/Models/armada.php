@@ -13,7 +13,9 @@ class Armada extends Model
         'name',
         'price',
         'plat',
-        'picture_url'
+        'picture_url',
+        'transmission',
+        'plat',
     ];
 
     public function latestTransaction()

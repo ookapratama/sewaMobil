@@ -40,7 +40,7 @@
                                     <th>
                                         <p class="card-title-desc"> Rp. {{ number_format($data->price, 0, ',', '.') }} </p>
                                     </th>
-                                    <th><button class="btn btn-primary rounded"> {{ $data->status }} </button></th>
+                                    <th><button class="btn btn-{{ $data->status == 'booked' ? 'secondary' : 'primary'}} rounded"> {{ $data->status }} </button></th>
 
                                     <th>
                                         <div class="d-flex">
@@ -89,6 +89,22 @@
                                     <label for="address">Price</label>
                                     <input name="price" class="form-control" placeholder="Masukan Harga.."
                                         required></input>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="col-md-12">
+                                    <label for="address">Plat</label>
+                                    <input name="plat" type="number" class="form-control" placeholder="Masukan Harga.."
+                                        required></input>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="col-md-12">
+                                    <label for="address">Transmisi</label>
+                                    <select class="form-control" name="transmission" id="">
+                                        <option value="matic">Matic</option>
+                                        <option value="manual">Manual</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="mb-3">

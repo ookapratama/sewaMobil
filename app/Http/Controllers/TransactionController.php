@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoretransactionRequest;
 use App\Http\Requests\UpdatetransactionRequest;
+use App\Models\Armada;
 use App\Models\transaction;
 
 
@@ -69,9 +70,14 @@ class TransactionController extends Controller
      * @param  \App\Models\transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function show(transaction $transaction)
+    public function show($id)
     {
-        //
+        $find = transaction::find($id);
+        $data = array(
+            'title' => 'Transaction Detail',
+            'transaksi' => $find
+        );
+        return view('admin.transaction_id', $data);
     }
 
     /**
@@ -92,9 +98,18 @@ class TransactionController extends Controller
      * @param  \App\Models\transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatetransactionRequest $request, transaction $transaction)
+    public function update(UpdatetransactionRequest $request)
     {
-        //
+        $find = transaction::find($request->id);
+        $find_armada = Armada::find($request->armada_id);
+        $data = $request->all();
+        $find_armada['status'] = 'booked';
+        $find['status'] = 'success';
+
+        $find_armada->update($data);
+        $find->update($data);
+
+        return redirect()->route('transaksi.index');
     }
 
     /**
@@ -103,8 +118,15 @@ class TransactionController extends Controller
      * @param  \App\Models\transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(transaction $transaction)
+    public function destroy($id, $id_armada)
     {
-        //
+        // dd($id_armada);
+        $find_armada = Armada::find($id_armada);
+        $find_armada['status'] = 'available';
+        $find = transaction::find($id);
+
+        $find_armada->update();
+        $find->delete();
+        return redirect()->route('transaksi.index');  
     }
 }

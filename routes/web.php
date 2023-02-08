@@ -98,11 +98,7 @@ Route::post('/add-testimoni',[TestimoniController::class, 'testi_user_add'])->na
 
 Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction.index');
 
-Route::get('/transaction-detail', function () {
-    return view('/admin/transaction_id', [
-        "title" => "Transaction Detail",
-    ]);
-});
+
 
 
 
@@ -151,7 +147,8 @@ Route::group(['prefix' => '/admin', 'namespace' => 'App\Http\Controllers', 'midd
         Route::post('/store', [TransactionController::class, 'store'])->name('transaksi.store');
         Route::get('/edit/{id}', [TransactionController::class, 'edit'])->name('transaksi.edit');
         Route::put('/update', [TransactionController::class, 'update'])->name('transaksi.update');
-        Route::delete('/destroy/{id}', [TransactionController::class, 'destroy'])->name('transaksi.destroy');
+        Route::delete('/destroy/{id1}/{id2}', [TransactionController::class, 'destroy'])->name('transaksi.destroy');
+        Route::get('/transaction-detail/{id}', [TransactionController::class, 'show'])->name('transaksi.detail');
 
     }
     );

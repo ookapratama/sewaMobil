@@ -24,7 +24,7 @@ class transaction extends Model
 
     public function armada()
     {
-        return $this->belongsTo(Armada::class, 'id', 'armada_id');
+        return $this->belongsTo(Armada::class, 'armada_id', 'id');
     }
 
     // public function user()
