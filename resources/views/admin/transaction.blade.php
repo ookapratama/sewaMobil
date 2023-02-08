@@ -65,7 +65,7 @@
                         </div>
                         @error('armada_id')
                             <div class="invalid-feedback">
-                                {{ $message; }}
+                                {{ $message }}
                             </div>
                         @enderror
                     <div class="mb-6">

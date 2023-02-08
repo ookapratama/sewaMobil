@@ -15,14 +15,20 @@
                         </div>
                     </div>
                     <div class="col-md-6 pl-lg-5 wow fadeInRight">
-                        <form action="" class="oleez-contact-form" method="POST">
+                        <form action="{{ route('testi.user') }} " class="oleez-contact-form" method="POST">
+                            @csrf
                             <div class="form-group">
-                                <input type="text" class="oleez-input" id="fullName" name="fullName" required>
+                                <input type="text" class="oleez-input" id="fullName" name="fullname" required>
                                 <label for="fullName">*Username</label>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="oleez-input" id="carsname" name="carsname" required>
                                 <label for="carsname">*Car/Bus Name</label>
+                                <select name="car_name" class="form-select" aria-label="Default select example" id="car">
+                                    @foreach ($car as $item)
+                                        <option value="">Select </option>
+                                        <option value="{{ $item->name }}">{{ $item->name }} </option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="message">*Ulasan</label>

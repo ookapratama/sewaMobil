@@ -74,12 +74,8 @@ Route::get('/user-profile', function () {
 });
 
 
-Route::get('/add-testimoni', function () {
-    return view('/add_testimoni', [
-        "title" => "Add Testimoni",
-    ]);
-});
-Route::post('/add-testimoni',[TestimoniController::class, 'testi_user'])->name('testi.user');
+Route::get('/add-testimoni', [TestimoniController::class, 'testi_user'])->name('testi');
+Route::post('/add-testimoni',[TestimoniController::class, 'testi_user_add'])->name('testi.user');
 
 
 
@@ -119,7 +115,7 @@ Route::get('/transaction-detail', function () {
 //     ]);
 // });
 
-Route::get('/review', [TestimoniController::class, 'indextestimoni'])->name('testi.index');
+// Route::get('/review', [TestimoniController::class, 'indextestimoni'])->name('testi.index');
 // Route::get('/review', function () {
 //     return view('/admin/review', [
 //     "title" => "Testimoni"
@@ -149,6 +145,15 @@ Route::get('/error', function () {
 Route::group(['prefix' => '/admin', 'namespace' => 'App\Http\Controllers', 'middleware' => 'auth'], function () {
 
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::group(['prefix' => '/testi'], function () {
+        Route::get('/', [TestimoniController::class, 'indextestimoni'])->name('testi.index');
+        Route::get('/edit/{id}', [TestimoniController::class, 'edit'])->name('testi.edit');
+        Route::put('/update', [TestimoniController::class, 'update'])->name('testi.update');
+        Route::delete('/destroy/{id}', [TestimoniController::class, 'destroy'])->name('testi.destroy');
+
+    }
+    );
 
     Route::group(['prefix' => '/user'], function () {
         Route::get('/', [UserController::class, 'index'])->name('user.index');

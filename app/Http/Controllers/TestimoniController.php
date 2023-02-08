@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoretestimoniRequest;
 use App\Http\Requests\UpdatetestimoniRequest;
+use App\Models\Armada;
 use App\Models\testimoni;
+use Illuminate\Http\Request;
 
 class TestimoniController extends Controller
 {
@@ -70,9 +72,15 @@ class TestimoniController extends Controller
      * @param  \App\Models\testimoni  $testimoni
      * @return \Illuminate\Http\Response
      */
-    public function edit(testimoni $testimoni)
+    public function edit($id)
     {
-        //
+        $car = Armada::all();
+        $testi = testimoni::find($id);
+        return response()->json([
+            'car'   => $car,
+            'testi' => $testi,
+            'status' => 200
+        ]);
     }
 
     /**
@@ -93,14 +101,29 @@ class TestimoniController extends Controller
      * @param  \App\Models\testimoni  $testimoni
      * @return \Illuminate\Http\Response
      */
-    public function destroy(testimoni $testimoni)
+    public function destroy($id)
     {
-        //
+        $find = testimoni::find($id);
+        $find->delete();
+        return redirect()->route('testi.index');  
     }
 
-    public function testi_moni(Request $request) {
+    public function testi_user() {
 
+        $data = array(
+            'car' => $car = Armada::all(),
+            'title' => 'Add Testimoni'
+        );       
+        return view('add_testimoni', $data);
+
+    }
+    public function testi_user_add(Request $request) {
+
+        $data = $request->all();
         
+        testimoni::create($data);
+        // dd($request);
+        return redirect()->route('testi');
 
     }
 }

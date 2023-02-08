@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class testimoni extends Model{
 
     use HasFactory;
-
+    protected $fillable = [
+        'fullname',
+        'car_name',
+        'message'
+    ];
 
 }
