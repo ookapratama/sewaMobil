@@ -29,7 +29,7 @@ use App\Http\Controllers\TransactionController;
 //User View
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/aboutus', [AboutUsController::class, 'index']);
-Route::get('/katalog', [ArmadaController::class, 'index']);
+Route::get('/katalog', [ArmadaController::class, 'index'])->name('katalog.index');
 Route::get('/testimoni', [TestimoniController::class, 'index']);
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.cek');
@@ -145,6 +145,17 @@ Route::get('/error', function () {
 Route::group(['prefix' => '/admin', 'namespace' => 'App\Http\Controllers', 'middleware' => 'auth'], function () {
 
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::group(['prefix' => '/transaksi'], function () {
+        Route::get('/', [TransactionController::class, 'index'])->name('transaksi.index');
+        Route::post('/store', [TransactionController::class, 'store'])->name('transaksi.store');
+        Route::get('/edit/{id}', [TransactionController::class, 'edit'])->name('transaksi.edit');
+        Route::put('/update', [TransactionController::class, 'update'])->name('transaksi.update');
+        Route::delete('/destroy/{id}', [TransactionController::class, 'destroy'])->name('transaksi.destroy');
+
+    }
+    );
+
 
     Route::group(['prefix' => '/testi'], function () {
         Route::get('/', [TestimoniController::class, 'indextestimoni'])->name('testi.index');

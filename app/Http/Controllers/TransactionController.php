@@ -43,7 +43,24 @@ class TransactionController extends Controller
      */
     public function store(StoretransactionRequest $request)
     {
-        //
+        // dd($request->bookingcode);
+        $data = $request->all();
+        $namaInvoice = time() . '.' . $request->invoice->extension();
+        $namaKtp = time() . '.' . $request->ktp->extension();
+        $namaSim = time() . '.' . $request->sim->extension();
+        // dd($nama);
+        $request->invoice->move(public_path('image/invoice/'), $namaInvoice);
+        $request->ktp->move(public_path('image/ktp/'), $namaKtp);
+        $request->sim->move(public_path('image/sim/'), $namaSim);
+
+        $data['dp_invoice'] = $namaInvoice;
+        $data['ktp'] = $namaKtp;
+        $data['sim'] = $namaSim;
+        // $data['bookingcode'] += 1;
+
+        transaction::create($data);
+        return redirect()->route('katalog.index');
+
     }
 
     /**
