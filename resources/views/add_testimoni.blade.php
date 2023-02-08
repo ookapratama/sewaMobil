@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 pl-lg-5 wow fadeInRight">
-                        <form action="POST" class="oleez-contact-form">
+                        <form action="" class="oleez-contact-form" method="POST">
                             <div class="form-group">
                                 <input type="text" class="oleez-input" id="fullName" name="fullName" required>
                                 <label for="fullName">*Username</label>

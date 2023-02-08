@@ -177,7 +177,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: "/driver/edit/" + id,
+                    url: "/admin/driver/edit/" + id,
                     success: function(response) {
                         console.log(response.driver.name);
                         $('#name_old').val(response.driver.name);

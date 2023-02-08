@@ -21,7 +21,7 @@ use App\Http\Controllers\TransactionController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
- */
+*/
 
 
 //  Route::get('/', [LoginController::class, 'index']);
@@ -33,6 +33,7 @@ Route::get('/katalog', [ArmadaController::class, 'index']);
 Route::get('/testimoni', [TestimoniController::class, 'index']);
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.cek');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/signup', [SignupController::class, 'index']);
 Route::post('/signup', [SignupController::class, 'store'])->name('sign.store');
 
@@ -72,11 +73,13 @@ Route::get('/user-profile', function () {
     ]);
 });
 
+
 Route::get('/add-testimoni', function () {
     return view('/add_testimoni', [
         "title" => "Add Testimoni",
     ]);
 });
+Route::post('/add-testimoni',[TestimoniController::class, 'testi_user'])->name('testi.user');
 
 
 
@@ -91,7 +94,6 @@ Route::get('/add-testimoni', function () {
 //         }
 //     );
 
-Route::get('/users', [UserController::class, 'index'])->name('user.index');
 // Route::get('/users', function () {
 //     return view('/admin/users', [
 //     "title" => "Users"
@@ -106,29 +108,7 @@ Route::get('/transaction-detail', function () {
     ]);
 });
 
-Route::group(['prefix' => '/admin', 'namespace' => 'App\Http\Controllers', 'middleware' => ['auth']],function () {
-    
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::group(['prefix' => '/cars'], function() {
-        Route::get('/', [ArmadaController::class, 'indexCars'])->name('cars.index');
-        Route::post('/store', [ArmadaController::class, 'store'])->name('cars.store');
-        Route::get('/edit/{id}', [ArmadaController::class, 'edit'])->name('cars.edit');
-        Route::put('/update', [ArmadaController::class, 'update'])->name('cars.update');
-        Route::delete('/destroy/{id}', [ArmadaController::class, 'destroy'])->name('cars.destroy');
-
-    });
-
-    Route::group(['prefix' => '/driver'], function() {
-        Route::get('/', [DriverController::class, 'index'])->name('driver.index');
-        Route::post('/store', [DriverController::class, 'store'])->name('driver.store');
-        Route::get('/edit/{id}', [DriverController::class, 'edit'])->name('driver.edit');
-        Route::put('/update', [DriverController::class, 'update'])->name('driver.update');
-        Route::delete('/destroy/{id}', [DriverController::class, 'destroy'])->name('driver.destroy');
-
-    });
-
-});
 
 
 // Route::get('/driver', [DriverController::class, 'index']);
@@ -165,3 +145,38 @@ Route::get('/error', function () {
 });
 
 
+// Admin
+Route::group(['prefix' => '/admin', 'namespace' => 'App\Http\Controllers', 'middleware' => 'auth'], function () {
+
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::group(['prefix' => '/user'], function () {
+        Route::get('/', [UserController::class, 'index'])->name('user.index');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+        Route::put('/update', [UserController::class, 'update'])->name('user.update');
+        Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
+    }
+    );
+
+    Route::group(['prefix' => '/cars'], function () {
+        Route::get('/', [ArmadaController::class, 'indexCars'])->name('cars.index');
+        Route::post('/store', [ArmadaController::class, 'store'])->name('cars.store');
+        Route::get('/edit/{id}', [ArmadaController::class, 'edit'])->name('cars.edit');
+        Route::put('/update', [ArmadaController::class, 'update'])->name('cars.update');
+        Route::delete('/destroy/{id}', [ArmadaController::class, 'destroy'])->name('cars.destroy');
+
+    }
+    );
+
+    Route::group(['prefix' => '/driver'], function () {
+        Route::get('/', [DriverController::class, 'index'])->name('driver.index');
+        Route::post('/store', [DriverController::class, 'store'])->name('driver.store');
+        Route::get('/edit/{id}', [DriverController::class, 'edit'])->name('driver.edit');
+        Route::put('/update', [DriverController::class, 'update'])->name('driver.update');
+        Route::delete('/destroy/{id}', [DriverController::class, 'destroy'])->name('driver.destroy');
+
+    }
+    );
+
+});

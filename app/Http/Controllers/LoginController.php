@@ -23,19 +23,17 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
         // dd($request);
-        $user = User::where('email', $request->email)->first();
-        // dd($user);
-        if($request->email == $user->email)
-        {
+        
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
             $user = User::where('email', $request->email)->first();
-            // dd($user);
             $id         = $request->session()->put('id', $user->id);
             $username   = $request->session()->put('username', $user->username);
             $nama       = $request->session()->put('email', $user->email);
-
-            return redirect()->route('dashboard');
+            return redirect()->intended(route('dashboard'));
         }
+
+        
 
         return back()->with('loginError', 'Login Failed!');
     }
@@ -43,6 +41,11 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
+        
+        Session()->forget('id');
+        Session()->forget('nama');
+        Session()->forget('username');
+        Session()->forget('email');
 
         $request->session()->invalidate();
 

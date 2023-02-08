@@ -172,7 +172,7 @@
 
             $.ajax({
                 type: "GET",
-                url: "/cars/edit/"+id,
+                url: "/admin/cars/edit/"+id,
                 success : function (response) {
                     console.log(response.car.picture_url);
                     $('#name_old').val(response.car.name);

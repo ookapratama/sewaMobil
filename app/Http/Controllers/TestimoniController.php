@@ -97,4 +97,10 @@ class TestimoniController extends Controller
     {
         //
     }
+
+    public function testi_moni(Request $request) {
+
+        
+
+    }
 }

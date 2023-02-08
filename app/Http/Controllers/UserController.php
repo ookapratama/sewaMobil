@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreuserRequest;
 use App\Http\Requests\UpdateuserRequest;
 use App\Models\user;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
@@ -63,9 +65,13 @@ class UserController extends Controller
      * @param  \App\Models\useraccount  $useraccount
      * @return \Illuminate\Http\Response
      */
-    public function edit(useraccount $useraccount)
+    public function edit($id)
     {
-        //
+        $user = user::find($id);
+        return response()->json([
+            'user' => $user,
+            'status' => 200
+        ]);
     }
 
     /**
@@ -75,9 +81,21 @@ class UserController extends Controller
      * @param  \App\Models\useraccount  $useraccount
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateuseraccountRequest $request, useraccount $useraccount)
+    public function update(UpdateuserRequest $request)
     {
-        //
+        $request->validate([
+            'password' => 'required'
+        ]);
+
+        $data = $request->all();
+        $data['password'] = Hash::make($request->password);
+        $find =  user::find($request->id);
+        
+        $find->update($data);
+        // dd($request);
+        return redirect()->route('user.index');
+
+
     }
 
     /**
