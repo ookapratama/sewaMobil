@@ -51,8 +51,8 @@
                                                 <i class="bi bi-pencil-square"></i>
                                             </button>
                                             <a href="{{ route('transaksi.detail', $data->id) }}"
-                                                class="btn {{ $data->status == 'success' ? 'disabled' : '' }} btn-warning">
-                                                Proses bayar
+                                                class="btn  btn-{{ $data->status == 'success' ? 'success disabled' : 'warning'}}">
+                                                {{ $data->status == 'success' ? 'Sudah dibayar' : 'Proses bayar'}}
                                             </a>
                                         </div>
                                     </td>
@@ -65,7 +65,7 @@
             </div>
         </div>
 
-        
+
 
         {{-- modal edit --}}
         <div class="modal fade" id="editModal" tabindex="-1">
@@ -76,8 +76,11 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     {{-- <form action="{{ route('transaction.store') }}" method="post"> --}}
-                    <form action="{{ route('transaksi.store') }} " method="post" enctype="multipart/form-data">
+                    <form action="{{ route('transaksi.admin.update') }} " id="editForm" method="post"
+                        enctype="multipart/form-data">
+                        @method('put')
                         @csrf
+                        <input type="hidden" name="id" id="id">
                         <div class="modal-body">
                             <div class="mb-6">
                                 <div class="col-md-12">
@@ -89,10 +92,8 @@
 
                             <div class="mb-6">
                                 <label for="armada_id" class="col-sm-3 col-form-label">Armada</label>
-
-
                                 <div class="col-sm-12">
-                                    <select name="armada_id" class="form-control selectx">
+                                    <select name="armada_id"  class="form-control selectx">
                                         <option value=""> Pilih Armada </option>
                                         @foreach ($armadas as $item)
                                             <option value="{{ $item->id }}"> {{ $item->name }} </option>
@@ -120,7 +121,8 @@
                                 <div class="mb-6">
                                     <div class="col-md-12">
                                         <label for="start-date">End-Date</label>
-                                        <input type="date" id="end_date_old" name="end_date" class="form-control" placeholder="">
+                                        <input type="date" id="end_date_old" name="end_date" class="form-control"
+                                            placeholder="">
                                     </div>
                                 </div>
 
@@ -159,7 +161,7 @@
                                 <div class="mb-6">
                                     <div class="col-md-12">
                                         <label for="ktp">KTP</label>
-                                        <input type="file" id="ktp_old" name="ktp" class="form-control"
+                                        <input type="file" name="ktp" class="form-control"
                                             placeholder="Upload..">
                                     </div>
                                 </div>
@@ -167,7 +169,7 @@
                                 <div class="mb-6">
                                     <div class="col-md-12">
                                         <label for="sim">SIM</label>
-                                        <input type="file" id="sim_old" name="sim" class="form-control"
+                                        <input type="file" name="sim" class="form-control"
                                             placeholder="Upload..">
                                     </div>
                                 </div>
@@ -186,6 +188,12 @@
                                         </div>
                                     @enderror
                                 </div>
+
+                                <input type="hidden" name="dp_invoice_old" id="invoice_old">
+                                <input type="hidden" name="ktp_old" id="ktp_old">
+                                <input type="hidden" name="sim_old" id="sim_old">
+                                <input type="hidden" name="armada_id_old" id="armada_id_old">
+
                                 <div class="modal-footer">
                                     <button class="btn btn-secondary" type="button"
                                         data-bs-dismiss="modal">Batal</button>
@@ -218,13 +226,17 @@
                     type: "GET",
                     url: "/admin/transaksi/edit/" + id,
                     success: function(response) {
-                        console.log(response.trans.fullname);
+                        console.log(response.trans);
                         $('#name_old').val(response.trans.fullname);
                         $('#no_telp_old').val(response.trans.no_telp);
                         $('#start_date_old').val(response.trans.start_date);
                         $('#end_date_old').val(response.trans.end_date);
                         $('#durasi_old').val(response.trans.durasi_sewa);
                         $('#alamat_old').val(response.trans.alamat);
+                        $('#invoice_old').val(response.trans.dp_invoice);
+                        $('#ktp_old').val(response.trans.ktp);
+                        $('#sim_old').val(response.trans.sim);
+                        $('#armada_id_old').val(response.trans.armada_id);
                         $('#id').val(id);
                     }
                 });

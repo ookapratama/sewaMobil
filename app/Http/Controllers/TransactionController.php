@@ -118,6 +118,41 @@ class TransactionController extends Controller
         return redirect()->route('transaksi.index');
     }
 
+    public function update_admin (UpdatetransactionRequest $request) {
+        // dd($request->all());
+        
+        $find = transaction::find($request->id);
+        // dd($request->hasFile('dp_invoice') || $request->hasFile('ktp') || $request->hasFile('sim') );
+        $data = $request->all();
+
+        // validasi gambar
+        if ($request->hasFile('dp_invoice') || $request->hasFile('ktp') || $request->hasFile('sim')) {
+
+            $namaInvoice = time() . '.' . $request->dp_invoice->extension();
+            $namaKtp = time() . '.' . $request->ktp->extension();
+            $namaSim = time() . '.' . $request->sim->extension();
+            // dd($nama);
+            $request->dp_invoice->move(public_path('image/invoice/'), $namaInvoice);
+            $request->ktp->move(public_path('image/ktp/'), $namaKtp);
+            $request->sim->move(public_path('image/sim/'), $namaSim);
+        }
+        else {
+            $data['dp_invoice'] = $request->dp_invoice_old;
+            $data['ktp'] = $request->ktp_old;
+            $data['sim'] = $request->sim_old;
+
+        }
+
+        //validasi armada id
+        if ($request->aramada_id == null) {
+            $data['armada_id'] = $find->armada_id;
+        }
+
+        // dd($data);
+        $find->update($data);
+        return redirect()->route('transaksi.index');    
+    }
+
     /**
      * Remove the specified resource from storage.
      *

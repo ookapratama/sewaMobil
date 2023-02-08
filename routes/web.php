@@ -147,6 +147,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'App\Http\Controllers', 'midd
         Route::post('/store', [TransactionController::class, 'store'])->name('transaksi.store');
         Route::get('/edit/{id}', [TransactionController::class, 'edit'])->name('transaksi.edit');
         Route::put('/update', [TransactionController::class, 'update'])->name('transaksi.update');
+        Route::put('/update_admin', [TransactionController::class, 'update_admin'])->name('transaksi.admin.update');
         Route::delete('/destroy/{id1}/{id2}', [TransactionController::class, 'destroy'])->name('transaksi.destroy');
         Route::get('/transaction-detail/{id}', [TransactionController::class, 'show'])->name('transaksi.detail');
 
