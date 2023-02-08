@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\testimoni;
+use App\Models\transaction;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use App\Models\Armada;
 
@@ -10,15 +13,16 @@ use App\Models\Armada;
 class DashboardController extends Controller
 {
 
-    public function index(){
-        $armadas = Armada::all();
-        // $masuk = Letter::where('letter_type', 'Surat Masuk')->get()->count();
-        // $keluar = Letter::where('letter_type', 'Surat Keluar')->get()->count();
+    public function index() {
 
-        return view('admin.dashboard', [
-            "title" => "Dashboard",
-            "armadas" => $armadas
+        $data = array(
+            'title' => "Dashboard",
+            'user' => User::all()->count(),
+            'car' => Armada::all()->count(),
+            'transaksi' => transaction::all()->count(),
+            'testimoni' => testimoni::all()->count(),
+        );
 
-        ]);
+        return view('admin.dashboard', $data);
     }
 }

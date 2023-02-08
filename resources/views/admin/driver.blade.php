@@ -10,6 +10,12 @@
                                 data-bs-target="#verticalycentered"> Tambah Data </button>
                     </h5>
 
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $v)
+                            <li class="list-group-item list-group-item-danger">{{ $v }}</li>
+                        @endforeach
+                    @endif
+
                     <table class="table table-sm datatable">
                         <thead>
                             <tr>
@@ -49,13 +55,21 @@
                             </div> --}}
                                     </td>
                                     <td>
-                                        <form action="{{ route('driver.destroy', $driver->id) }} " method="post">
-                                            {{ method_field('delete') }}
-                                            @csrf
-                                            <button type="submit" class="btn btn-danger">
-                                                <i class="bi bi-trash"></i>
+                                        <div class="d-flex">
+
+                                            <form class="me-2" action="{{ route('driver.destroy', $driver->id) }} "
+                                                method="post">
+                                                {{ method_field('delete') }}
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                            <button type="button" value="{{ $driver->id }}"
+                                                class="btn editBtn btn-primary">
+                                                <i class="bi bi-pencil-square"></i>
                                             </button>
-                                        </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -73,7 +87,7 @@
                 </div>
             </div>
         </div>
-        {{-- modal --}}
+        {{-- modal tambah --}}
         <div class="modal fade" id="verticalycentered" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -81,6 +95,7 @@
                         <h5 class="modal-title">Add Driver</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+
                     {{-- <form action="{{ route('cars.store') }}" method="post"> --}}
                     <form action="{{ route('driver.store') }} " method="post">
                         @csrf
@@ -107,9 +122,73 @@
                 </div>
             </div>
         </div>
+
+        {{-- modal edit --}}
+        <div class="modal fade" id="editModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Ubah Driver</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    {{-- <form action="{{ route('cars.store') }}" method="post"> --}}
+                    <form action="{{ route('driver.update') }} " method="post">
+                        {{ method_field('put') }}
+                        @csrf
+                        <input type="hidden" id="id" name="id">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <div class="col-md-12">
+                                    <label for="name">Driver Name</label>
+                                    <input type="text" name="name" id="name_old" class="form-control"
+                                        placeholder="Masukan Nama Driver.." required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="col-md-12">
+                                    <label for="address">Phone Number</label>
+                                    <input name="phone" class="form-control" id="phone_old" placeholder="08xx..."
+                                        required></input>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
+                            <button class="btn btn-primary" type="submit">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </section>
     </main>
     @include('partials.footerAdmin')
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.editBtn', function() {
+                var id = $(this).val();
+                // alert(id);
+                $('#editModal').modal('show');
+
+                $.ajax({
+                    type: "GET",
+                    url: "/driver/edit/" + id,
+                    success: function(response) {
+                        console.log(response.driver.name);
+                        $('#name_old').val(response.driver.name);
+                        $('#phone_old').val(response.driver.phone);
+                        $('#id').val(id);
+                    }
+                });
+
+            });
+        });
+    </script>
 @endsection
 
 @push('addon-style')

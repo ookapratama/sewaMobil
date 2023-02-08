@@ -12,14 +12,14 @@
     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
-    <link href="assets_admin/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets_admin/css/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets_admin/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets_admin/css/quill.snow.css" rel="stylesheet">
-    <link href="assets_admin/css/quill.bubble.css" rel="stylesheet">
-    <link href="assets_admin/css/remixicon.css" rel="stylesheet">
-    <link href="assets_admin/css/simple-datatables.css" rel="stylesheet">
-    <link href="assets_admin/css/style.css" rel="stylesheet">
+    <link href="{{ asset('assets_admin/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets_admin/css/bootstrap-icons.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets_admin/css/boxicons.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets_admin/css/quill.snow.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets_admin/css/quill.bubble.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets_admin/css/remixicon.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets_admin/css/simple-datatables.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets_admin/css/style.css')}}" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap5.min.css">
 </head>
@@ -36,7 +36,7 @@
             <h1>{{ $title }}</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }} ">Home</a></li>
                     <li class="breadcrumb-item active">{{ $title }}</li>
                 </ol>
             </nav>
@@ -54,15 +54,15 @@
     
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
-    <script src="assets_admin/js/apexcharts.min.js"></script>
-    <script src="assets_admin/js/bootstrap.bundle.min.js"></script>
-    <script src="assets_admin/js/chart.min.js"></script>
-    <script src="assets_admin/js/echarts.min.js"></script>
-    <script src="assets_admin/js/quill.min.js"></script>
-    <script src="assets_admin/js/simple-datatables.js"></script>
-    <script src="assets_admin/js/tinymce.min.js"></script>
-    <script src="assets_admin/js/validate.js"></script>
-    <script src="assets_admin/js/main.js"></script>
+    <script src="{{ asset('assets_admin/js/apexcharts.min.js')}}"></script>
+    <script src="{{ asset('assets_admin/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('assets_admin/js/chart.min.js')}}"></script>
+    <script src="{{ asset('assets_admin/js/echarts.min.js')}}"></script>
+    <script src="{{ asset('assets_admin/js/quill.min.js')}}"></script>
+    <script src="{{ asset('assets_admin/js/simple-datatables.js')}}"></script>
+    <script src="{{ asset('assets_admin/js/tinymce.min.js')}}"></script>
+    <script src="{{ asset('assets_admin/js/validate.js')}}"></script>
+    <script src="{{ asset('assets_admin/js/main.js')}}"></script>
 </body>
 
 </html>

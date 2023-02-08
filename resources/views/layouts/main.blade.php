@@ -13,10 +13,10 @@
 
 
     {{-- landing page  --}}
-      <link rel="stylesheet" href="./assets/vendors/animate.css/animate.min.css">
-      <link rel="stylesheet" href="./assets/vendors/slick-carousel/slick.css">
-      <link rel="stylesheet" href="./assets/vendors/slick-carousel/slick-theme.css">
-      <link rel="stylesheet" href="assets/css/style.css">
+      <link rel="stylesheet" href="{{ asset('assets/vendors/animate.css/animate.min.css')}}">
+      <link rel="stylesheet" href="{{ asset('assets/vendors/slick-carousel/slick.css')}}">
+      <link rel="stylesheet" href="{{ asset('assets/vendors/slick-carousel/slick-theme.css')}}">
+      <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
 
       <!-- gLightbox gallery-->
       <link rel="stylesheet" href="vendor/vendor-detail/glightbox/css/glightbox.min.css">

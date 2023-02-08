@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoredriverRequest;
 use App\Http\Requests\UpdatedriverRequest;
 use App\Models\driver;
+use Illuminate\Http\Request;
 
 class DriverController extends Controller
 {
@@ -39,8 +40,12 @@ class DriverController extends Controller
      * @param  \App\Http\Requests\StoredriverRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoredriverRequest $request)
+    public function store(Request $request)
     {
+        $request->validate([
+            'phone' => 'numeric|required',
+            'name' => 'required'
+        ]);
         $data = $request->all();
         
         driver::create($data);
@@ -65,9 +70,13 @@ class DriverController extends Controller
      * @param  \App\Models\driver  $driver
      * @return \Illuminate\Http\Response
      */
-    public function edit(driver $driver)
+    public function edit($id)
     {
-        //
+        $driver = driver::find($id);
+        return response()->json([
+            'driver' => $driver,
+            'status' => 200
+        ]);
     }
 
     /**
@@ -77,9 +86,14 @@ class DriverController extends Controller
      * @param  \App\Models\driver  $driver
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatedriverRequest $request, driver $driver)
+    public function update(Request $request)
     {
-        //
+        $data = $request->all();
+        $find =  driver::find($request->id);
+        
+        $find->update($data);
+        // dd($request);
+        return redirect()->route('driver.index');
     }
 
     /**

@@ -32,7 +32,7 @@
                                     <p class="login-card-footer-text">Don't have an account? <a href="/signup"
                                             class="text-reset">Register here</a></p>
                                     <nav class="login-card-footer-nav">
-                                        <a href="/dashboard">login admin</a>
+                                        <a href="{{ route('dashboard') }}">login admin</a>
                                     </nav>
                                 </div>
                             </div>

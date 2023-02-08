@@ -43,16 +43,19 @@
                                     <th><button class="btn btn-primary rounded"> {{ $data->status }} </button></th>
 
                                     <th>
-                                        <form action="{{ route('cars.destroy', $data->id) }} " method="post">
-                                            {{ method_field('delete') }}
-                                            @csrf
-                                            <button type="submit" class="btn btn-danger">
-                                                <i class="bi bi-trash"></i>
+                                        <div class="d-flex">
+
+                                            <form class="me-2" action="{{ route('cars.destroy', $data->id) }} " method="post">
+                                                {{ method_field('delete') }}
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                            <button type="button" value="{{ $data->id }}" class="btn editBtn btn-primary">
+                                                <i class="bi bi-pencil-square"></i>
                                             </button>
-                                        </form>
-                                        <button type="button" value="{{ $data->id }}" class="btn editBtn btn-primary">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </button>
+                                        </div>
                                     </th>
                                 </tr>
                             @endforeach

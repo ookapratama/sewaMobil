@@ -76,11 +76,7 @@ Route::get('/add-testimoni', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-return view('/admin/dashboard', [
-    "title" => "Dashboard",
-]);
-});
+
 
 // Admin
 // Route::prefix('admin')
@@ -93,14 +89,14 @@ return view('/admin/dashboard', [
 //         }
 //     );
 
-Route::get('/users', [UserController::class, 'index']);
+Route::get('/users', [UserController::class, 'index'])->name('user.index');
 // Route::get('/users', function () {
 //     return view('/admin/users', [
 //     "title" => "Users"
 //     ]);
 // });
 
-Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction');
+Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction.index');
 
 Route::get('/transaction-detail', function () {
     return view('/admin/transaction_id', [
@@ -108,9 +104,10 @@ Route::get('/transaction-detail', function () {
     ]);
 });
 
-
-Route::group(['prefix' => '', 'namespace' => 'App\Http\Controllers'], function () {
+Route::group(['prefix' => '/admin', 'namespace' => 'App\Http\Controllers'],function () {
     
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::group(['prefix' => '/cars'], function() {
         Route::get('/', [ArmadaController::class, 'indexCars'])->name('cars.index');
         Route::post('/store', [ArmadaController::class, 'store'])->name('cars.store');
@@ -119,17 +116,16 @@ Route::group(['prefix' => '', 'namespace' => 'App\Http\Controllers'], function (
         Route::delete('/destroy/{id}', [ArmadaController::class, 'destroy'])->name('cars.destroy');
 
     });
-});
 
-Route::group(['prefix' => '', 'namespace' => 'App\Http\Controllers'], function () {
-    
     Route::group(['prefix' => '/driver'], function() {
         Route::get('/', [DriverController::class, 'index'])->name('driver.index');
         Route::post('/store', [DriverController::class, 'store'])->name('driver.store');
+        Route::get('/edit/{id}', [DriverController::class, 'edit'])->name('driver.edit');
         Route::put('/update', [DriverController::class, 'update'])->name('driver.update');
         Route::delete('/destroy/{id}', [DriverController::class, 'destroy'])->name('driver.destroy');
 
     });
+
 });
 
 
@@ -141,7 +137,7 @@ Route::group(['prefix' => '', 'namespace' => 'App\Http\Controllers'], function (
 //     ]);
 // });
 
-Route::get('/review', [TestimoniController::class, 'indextestimoni']);
+Route::get('/review', [TestimoniController::class, 'indextestimoni'])->name('testi.index');
 // Route::get('/review', function () {
 //     return view('/admin/review', [
 //     "title" => "Testimoni"
