@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Auth;   
 
 class LoginController extends Controller
 {
@@ -15,15 +17,24 @@ class LoginController extends Controller
 
     public function authenticate(Request $request)
     {
+        // dd($request);
         $credentials = $request->validate([
-            'email' => 'required|email:dns',
+            'email' => 'required',
             'password' => 'required'
         ]);
-
-        if(Auth::attempt($credentials))
+        // dd($request);
+        $user = User::where('email', $request->email)->first();
+        // dd($user);
+        if($request->email == $user->email)
         {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+            $user = User::where('email', $request->email)->first();
+            // dd($user);
+            $id         = $request->session()->put('id', $user->id);
+            $username   = $request->session()->put('username', $user->username);
+            $nama       = $request->session()->put('email', $user->email);
+
+            return redirect()->route('dashboard');
         }
 
         return back()->with('loginError', 'Login Failed!');

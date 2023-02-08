@@ -14,7 +14,13 @@
                             <div class="col-md-7">
                                 <div class="card-body">
                                     <p class="login-card-description">Sign In</p>
-                                    <form action="#!">
+                                    @if ($errors->any())
+                                        @foreach ($errors->all() as $v)
+                                            <li class="list-group-item list-group-item-danger">{{ $v }}</li>
+                                        @endforeach
+                                    @endif
+                                    <form action="{{ route('login.cek') }}" method="POST">
+                                        @csrf
                                         <div class="form-group">
                                             <label for="email" class="sr-only">Email</label>
                                             <input type="email" name="email" id="email" class="form-control"
@@ -25,15 +31,12 @@
                                             <input type="password" name="password" id="password" class="form-control"
                                                 placeholder="Enter Password">
                                         </div>
-                                        <input name="login" id="login" class="btn btn-block login-btn mb-4"
-                                            type="button" value="Login">
+                                        <button id="login" class="btn btn-block login-btn mb-4"
+                                        type="submit">Login</button>
                                     </form>
-                                    <a href="#!" class="forgot-password-link">Forgot password?</a>
                                     <p class="login-card-footer-text">Don't have an account? <a href="/signup"
                                             class="text-reset">Register here</a></p>
-                                    <nav class="login-card-footer-nav">
-                                        <a href="{{ route('dashboard') }}">login admin</a>
-                                    </nav>
+
                                 </div>
                             </div>
                         </div>

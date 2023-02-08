@@ -31,8 +31,10 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/aboutus', [AboutUsController::class, 'index']);
 Route::get('/katalog', [ArmadaController::class, 'index']);
 Route::get('/testimoni', [TestimoniController::class, 'index']);
-Route::get('/login', [LoginController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login.cek');
 Route::get('/signup', [SignupController::class, 'index']);
+Route::post('/signup', [SignupController::class, 'store'])->name('sign.store');
 
 Route::get('/checkout', function () {
     return view('/checkout', [
@@ -104,7 +106,7 @@ Route::get('/transaction-detail', function () {
     ]);
 });
 
-Route::group(['prefix' => '/admin', 'namespace' => 'App\Http\Controllers'],function () {
+Route::group(['prefix' => '/admin', 'namespace' => 'App\Http\Controllers', 'middleware' => ['auth']],function () {
     
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 

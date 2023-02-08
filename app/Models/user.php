@@ -21,8 +21,10 @@ class User extends Authenticatable
     protected $fillable = [
         'username',
         'email',
-        'password',
+        'password'
     ];
+
+    // protected $guarded = [];  
 
     public function transaction()
     {
@@ -51,9 +53,5 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    // public function Testimoni()
-    // {
-    //     return $this->hasMany(testimoni::class, 'user_id', 'id');
-    // }
+    
 }

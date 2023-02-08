@@ -14,7 +14,13 @@
                         <div class="col-md-7">
                             <div class="card-body">
                                 <p class="login-card-description">Sign Up</p>
-                                <form action="#!">
+                                @if ($errors->any())
+                                    @foreach ($errors->all() as $v)
+                                        <li class="list-group-item list-group-item-danger">{{ $v }}</li>
+                                    @endforeach
+                                @endif
+                                <form action="{{ route('sign.store') }} " method="post">
+                                    {{ csrf_field() }}
                                     <div class="form-group">
                                         <label for="email" class="sr-only">Email</label>
                                         <input type="email" name="email" id="email" class="form-control"
@@ -22,7 +28,7 @@
                                     </div>
                                     <div class="form-group mb-4">
                                         <label for="password" class="sr-only">Full Name</label>
-                                        <input type="text" name="fullname" id="password" class="form-control"
+                                        <input type="text" name="username" id="password" class="form-control"
                                             placeholder="Username">
                                     </div>
                                     <div class="form-group mb-4">
@@ -30,10 +36,10 @@
                                         <input type="password" name="password" id="password" class="form-control"
                                             placeholder="Enter Password">
                                     </div>
-                                    <input name="signup" id="login" class="btn btn-block login-btn mb-4" type="button"
-                                        value="Sign Up">
+                                    <button id="login" class="btn btn-block login-btn mb-4" type="submit">
+                                        Sign Up
+                                    </button>
                                 </form>
-                                <a href="#!" class="forgot-password-link">Forgot password?</a>
                                 <p class="login-card-footer-text">Already have an account? <a href="/login"
                                         class="text-reset">Login here</a></p>
                             </div>
