@@ -109,14 +109,18 @@ class ArmadaController extends Controller
     {
         $data = $request->all();
         $find =  Armada::find($request->id);
-        // dd($find->picture_url);
-        if ($request->picture_url != $find->picture_url) {
+        // dd($request->picture_old);
+        if ($request->picture_url == $find->picture_url) {
             
             $nama = time() . '.' . $request->picture_url->extension();
             // dd($nama);
+            $request->picture_url->move(public_path('image/cars/'), $nama);
             $data['picture_url'] = $nama;
         }
-        $request->picture_url->move(public_path('image/cars/'), $nama);
+        else {
+            $data['picture_url'] = $request->picture_old;
+        }
+
 
         $find->update($data);
         // dd($request);

@@ -6,7 +6,7 @@
             <div class="card top-selling overflow-auto">
                 <div class="card-body pb-0">
                     <h5 class="card-title">Transaction List <span>|
-                            
+
                     </h5>
                     <table class="table table-borderless datatable">
                         <thead>
@@ -30,11 +30,14 @@
                                     <td>{{ $data->end_date }}</td>
                                     <td>{{ $data->armada->name }}</td>
                                     <td>Rp. {{ number_format($data->armada->price, 0, ',', '.') }} </td>
-                                    <td><span class="badge bg-{{ $data->status == 'success' ? 'success' : 'primary'}} rounded">{{ $data->status }}</span></td>
+                                    <td><span
+                                            class="badge bg-{{ $data->status == 'success' ? 'success' : 'primary' }} rounded">{{ $data->status }}</span>
+                                    </td>
                                     <td>
                                         <div class="d-flex">
 
-                                            <form class="me-2" action="{{ route('transaksi.destroy', ['id1'=>$data->id,'id2'=>$data->armada->id] ) }} "
+                                            <form class="me-2"
+                                                action="{{ route('transaksi.destroy', ['id1' => $data->id, 'id2' => $data->armada->id]) }} "
                                                 method="post">
                                                 {{ method_field('delete') }}
                                                 @csrf
@@ -62,25 +65,38 @@
             </div>
         </div>
 
-        {{-- modal --}}
-        <div class="modal fade" id="scrollingModal" tabindex="-1">
+        
+
+        {{-- modal edit --}}
+        <div class="modal fade" id="editModal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">New Transaction</h5>
+                        <h5 class="modal-title">Edit Transaction</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     {{-- <form action="{{ route('transaction.store') }}" method="post"> --}}
-                    <form action="" method="post">
+                    <form action="{{ route('transaksi.store') }} " method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
                             <div class="mb-6">
-                                <label for="armada_id" class="col-sm-3 col-form-label">Armada</label>
-                                <div class="col-sm-12">
-                                    <select name="armada_id" class="form-control selectx" required>
-                                        <option value="">Armada Name </option>
-                                        <option value="">Armada Name </option>
+                                <div class="col-md-12">
+                                    <label for="start-date">Nama Lengkap</label>
+                                    <input type="text" placeholder="Nama Lengkap..." id="name_old" name="fullname"
+                                        class="form-control">
+                                </div>
+                            </div>
 
+                            <div class="mb-6">
+                                <label for="armada_id" class="col-sm-3 col-form-label">Armada</label>
+
+
+                                <div class="col-sm-12">
+                                    <select name="armada_id" class="form-control selectx">
+                                        <option value=""> Pilih Armada </option>
+                                        @foreach ($armadas as $item)
+                                            <option value="{{ $item->id }}"> {{ $item->name }} </option>
+                                        @endforeach
                                         {{-- @foreach ($armadas as $armada)
                                     <option value="{{ $armada->id }}" {{ (old('id') == $armada->id)? 'selected':''; }}>{{ $armada->name }}</option>
                                 @endforeach --}}
@@ -91,64 +107,77 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
+
+                                {{-- <input type="hidden" value="" name="bookingcode"> --}}
+
                                 <div class="mb-6">
                                     <div class="col-md-12">
                                         <label for="start-date">Start-Date</label>
-                                        <input type="date" name="start-date" class="form-control"
-                                            placeholder="Pilih Tanggal" required></input>
+                                        <input type="date" id="start_date_old" name="start_date" class="form-control">
                                     </div>
                                 </div>
+
                                 <div class="mb-6">
                                     <div class="col-md-12">
                                         <label for="start-date">End-Date</label>
-                                        <input type="date" name="start-date" class="form-control"
-                                            placeholder="Masukan Harga.." required></input>
+                                        <input type="date" id="end_date_old" name="end_date" class="form-control" placeholder="">
                                     </div>
                                 </div>
+
                                 <div class="mb-6">
                                     <div class="col-md-12">
-                                        <label for="email">Email</label>
-                                        <input type="email" name="email" class="form-control" placeholder="Email.."
-                                            required>
+                                        <label for="address">Phone Number</label>
+                                        <input name="no_telp" id="no_telp_old" class="form-control" placeholder="08xx..."
+                                            required></input>
                                     </div>
                                 </div>
+
+                                <div class="mb-6">
+                                    <div class="col-md-12">
+                                        <label for="start-date">Durasi Sewa</label>
+                                        <input type="number" id="durasi_old" name="durasi_sewa" placeholder="... hari"
+                                            class="form-control" placeholder="">
+                                    </div>
+                                </div>
+
                                 <div class="mb-6">
                                     <div class="col-md-12">
                                         <label for="address">Alamat</label>
-                                        <input type="adress" name="address" class="form-control" placeholder="Alamat.."
-                                            required>
+                                        <input type="adress" id="alamat_old" name="alamat" class="form-control"
+                                            placeholder="Alamat..">
                                     </div>
                                 </div>
+
                                 <div class="mb-6">
                                     <div class="col-md-12">
                                         <label for="invoice">Bukti Pembayaran</label>
-                                        <input type="file" name="invoice" class="form-control" placeholder="Upload.."
-                                            required>
+                                        <input type="file" id="dp_invoice_old" name="dp_invoice" class="form-control"
+                                            placeholder="Upload..">
                                     </div>
                                 </div>
+
                                 <div class="mb-6">
                                     <div class="col-md-12">
                                         <label for="ktp">KTP</label>
-                                        <input type="file" name="ktp" class="form-control" placeholder="Upload.."
-                                            required>
+                                        <input type="file" id="ktp_old" name="ktp" class="form-control"
+                                            placeholder="Upload..">
                                     </div>
                                 </div>
+
                                 <div class="mb-6">
                                     <div class="col-md-12">
                                         <label for="sim">SIM</label>
-                                        <input type="file" name="sim" class="form-control" placeholder="Upload.."
-                                            required>
+                                        <input type="file" id="sim_old" name="sim" class="form-control"
+                                            placeholder="Upload..">
                                     </div>
                                 </div>
+
                                 <div class="mb-6">
                                     <label for="armada_id" class="col-sm-3 col-form-label">Supir</label>
                                     <div class="col-sm-12">
-                                        <select name="armada_id" class="form-control selectx" required>
-                                            <option value="">Lepas Kunci</option>
-                                            <option value="">Delivery</option>
-                                            {{-- @foreach ($armadas as $armada)
-                                    <option value="{{ $armada->id }}" {{ (old('department_id') == $armada->id)? 'selected':''; }}>{{ $armada->name }}</option>
-                                @endforeach --}}
+                                        <select name="pengantaran" class="form-control selectx">
+                                            <option value="self pick-up">Lepas Kunci</option>
+                                            <option value="Delivery">Delivery</option>
                                         </select>
                                     </div>
                                     @error('driver_id')
@@ -175,6 +204,34 @@
 <td><span class="badge bg-danger rounded-pill">Canceled</span></td> --}}
 
     @include('partials.footerAdmin')
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.editBtn', function() {
+                var id = $(this).val();
+                // alert(id);
+                $('#editModal').modal('show');
+
+                $.ajax({
+                    type: "GET",
+                    url: "/admin/transaksi/edit/" + id,
+                    success: function(response) {
+                        console.log(response.trans.fullname);
+                        $('#name_old').val(response.trans.fullname);
+                        $('#no_telp_old').val(response.trans.no_telp);
+                        $('#start_date_old').val(response.trans.start_date);
+                        $('#end_date_old').val(response.trans.end_date);
+                        $('#durasi_old').val(response.trans.durasi_sewa);
+                        $('#alamat_old').val(response.trans.alamat);
+                        $('#id').val(id);
+                    }
+                });
+
+            });
+        });
+    </script>
 @endsection
 
 @push('addon-style')

@@ -48,7 +48,7 @@
                                             <form class="me-2" action="{{ route('cars.destroy', $data->id) }} " method="post">
                                                 {{ method_field('delete') }}
                                                 @csrf
-                                                <button type="submit" class="btn btn-danger">
+                                                <button type="submit" class="btn {{ $data->status == 'booked' ? 'disabled' : '' }} btn-danger">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
                                             </form>
@@ -153,6 +153,22 @@
                             </div>
                             <div class="mb-3">
                                 <div class="col-md-12">
+                                    <label for="address">Plat</label>
+                                    <input name="plat" id="plat_old" type="number" class="form-control" placeholder="Masukan Harga.."
+                                        required></input>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="col-md-12">
+                                    <label for="address">Transmisi</label>
+                                    <select class="form-control" name="transmission" id="trans_old">
+                                        <option value="matic">Matic</option>
+                                        <option value="manual">Manual</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="col-md-12">
                                     <label for="email">Picture</label>
                                     <input type="file" name="picture_url" id="picture" class="form-control"
                                         placeholder="Upload Picture" >
@@ -194,6 +210,8 @@
                     $('#name_old').val(response.car.name);
                     $('#price_old').val(response.car.price);
                     $('#picture_old').val(response.car.picture_url);
+                    $('#plat_old').val(response.car.plat);
+                    $('#trans_old').val(response.car.transmission);
                     $('#id').val(id);
                     $('#showImage').attr('src', "{{ asset('image/cars') }}/" + response.car.picture_url);
                 }

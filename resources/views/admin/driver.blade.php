@@ -34,7 +34,7 @@
                                     <td><span> {{ $driver->name }} </span></td>
                                     <td>{{ $driver->phone }}</td>
                                     <td>
-                                        {{ $driver->status }}
+                                        <button class="btn btn-{{ $driver->status == 'available' ? 'primary' : 'secondary'}}">{{ $driver->status }}</button> 
                                         {{-- <button type="button" class="btn btn-success rounded-pill" data-bs-toggle="modal" data-bs-target="#verticalycentered"> Available </button>
                             <div class="modal fade" id="verticalycentered" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-centered">

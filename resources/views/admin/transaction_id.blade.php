@@ -57,6 +57,10 @@
                                             <td>{{ $transaksi->sim }}</td>
                                         </tr>
                                         <tr>
+                                            <th>Total Pembayaran</th>
+                                            <td>Rp. {{ number_format($transaksi->armada->price, 0, ',', '.') }}</td>
+                                        </tr>
+                                        <tr>
                                             <th>Status Transaksi</th>
                                             <td><button class="btn btn-primary"> {{ $transaksi->status }} </button></td>
                                         </tr>

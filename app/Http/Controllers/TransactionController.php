@@ -18,9 +18,11 @@ class TransactionController extends Controller
     public function index()
     {
         $transactions = transaction::all();
+        $armada = Armada::where('status', 'available')->get();
         return view('/admin/transaction', [
             "title" => "Transaction",
-            "transactions" => $transactions
+            "transactions" => $transactions,
+            "armadas" => $armada
         ]
         );
     }
@@ -86,9 +88,13 @@ class TransactionController extends Controller
      * @param  \App\Models\transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function edit(transaction $transaction)
+    public function edit($id)
     {
-        //
+        $trans = transaction::find($id);
+        return response()->json([
+            'trans' => $trans,
+            'status' => 200
+        ]);
     }
 
     /**
