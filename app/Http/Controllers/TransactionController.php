@@ -45,11 +45,11 @@ class TransactionController extends Controller
     {
         // dd($request->bookingcode);
         $data = $request->all();
-        $namaInvoice = time() . '.' . $request->invoice->extension();
+        $namaInvoice = time() . '.' . $request->dp_invoice->extension();
         $namaKtp = time() . '.' . $request->ktp->extension();
         $namaSim = time() . '.' . $request->sim->extension();
         // dd($nama);
-        $request->invoice->move(public_path('image/invoice/'), $namaInvoice);
+        $request->dp_invoice->move(public_path('image/invoice/'), $namaInvoice);
         $request->ktp->move(public_path('image/ktp/'), $namaKtp);
         $request->sim->move(public_path('image/sim/'), $namaSim);
 

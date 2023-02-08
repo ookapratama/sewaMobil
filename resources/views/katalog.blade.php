@@ -106,7 +106,7 @@
                                 <div class="mb-6">
                                     <div class="col-md-12">
                                         <label for="invoice">Bukti Pembayaran</label>
-                                        <input type="file" name="invoice" class="form-control" placeholder="Upload..">
+                                        <input type="file" name="dp_invoice" class="form-control" placeholder="Upload..">
                                     </div>
                                 </div>
 
