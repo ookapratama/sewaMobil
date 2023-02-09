@@ -27,7 +27,12 @@
                                             placeholder="Email address">
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label for="password" class="sr-only">Full Name</label>
+                                        <label for="password" class="sr-only">Nama Lengkap</label>
+                                        <input type="text" name="fullname" id="password" class="form-control"
+                                            placeholder="Nama Lengkap">
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="password" class="sr-only">UserName</label>
                                         <input type="text" name="username" id="password" class="form-control"
                                             placeholder="Username">
                                     </div>

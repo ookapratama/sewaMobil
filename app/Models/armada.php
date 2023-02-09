@@ -16,6 +16,7 @@ class Armada extends Model
         'picture_url',
         'transmission',
         'plat',
+        'user_id',
     ];
 
     public function latestTransaction()
@@ -23,6 +24,9 @@ class Armada extends Model
         return $this->hasOne(transaction::class, 'transaction_id','id')->latestOfMany();
     }
 
+    public function getUser() {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 
 
 }

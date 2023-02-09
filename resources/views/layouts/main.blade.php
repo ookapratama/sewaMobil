@@ -47,9 +47,14 @@
     <script src="/assets/vendors/slick-carousel/slick.min.js"></script>
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/landing.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js" integrity="sha512-eyHL1atYNycXNXZMDndxrDhNAegH2BDWt1TmkXJPoGf1WLlNYt08CSjkqF5lnCRmdm3IrkHid8s2jOUY4NIZVQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    @yield('script')
+
 
     <script>
         new WOW({mobile: false}).init();
     </script>
+
   </body>
 </html>

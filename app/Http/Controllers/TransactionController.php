@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoretransactionRequest;
 use App\Http\Requests\UpdatetransactionRequest;
+use Illuminate\Http\Request;
 use App\Models\Armada;
 use App\Models\transaction;
+use App\Models\User;
 
 
 class TransactionController extends Controller
@@ -169,5 +171,85 @@ class TransactionController extends Controller
         $find_armada->update();
         $find->delete();
         return redirect()->route('transaksi.index');  
+    }
+
+    public function checkout ($id) {
+
+        $find = Armada::find($id);
+        // dd($find); 
+
+        return view('checkout', ['title' => 'Checkout', 'armada' => $find]);
+    }
+
+    public function checkout_store (Request $request ) {
+
+        $find = User::find($request->id);
+        $armada = Armada::find($request->armada_id);
+
+        $data = $request->all();
+        // dd($request->total);
+
+        $namaKtp = time() . '.' . $request->ktp->extension();
+        $namaSim = time() . '.' . $request->sim->extension();
+        // dd($nama);
+        $request->ktp->move(public_path('image/ktp/'), $namaKtp);
+        $request->sim->move(public_path('image/sim/'), $namaSim);
+
+        $data['ktp'] = $namaKtp;
+        $data['sim'] = $namaSim;
+        $biaya = 0;
+        if ($data['total'] != 0) {
+            if ($data['biaya_antar'] == 'utara') {
+                $biaya = 20000;
+            } else if ($data['biaya_antar'] == 'timur' || $data['biaya_antar'] == 'tengah' || $data['biaya_antar'] == 'barat') {
+                $biaya = 30000;
+            } else if ($data['biaya_antar'] == 'selatan') {
+                $biaya = 25000;
+            } 
+        }
+        $total = $armada->price * $request->durasi_sewa;
+        // dd($total);  
+
+        $data['total'] = $total;
+        
+        transaction::create($data);
+
+        
+
+        $uang = array(
+            'biaya_antar'   => $biaya,
+            'total'         => $total,
+            'armada'        => $armada,
+            'title'         => 'Payment',
+            'trans'         => $data['durasi_sewa']
+        );
+
+        return view('payment', $uang);
+    }
+
+    public function payment () {
+    
+        return view('payment', ['title' => 'Payment']);
+    }
+
+    public function payment_store(Request $request) {
+        // dd($request->all());
+
+        // validasi gambar
+        if ($request->hasFile('dp_invoice')) {
+
+            $namaInvoice = time() . '.' . $request->dp_invoice->extension();
+            // dd($nama);
+            $request->dp_invoice->move(public_path('image/invoice/'), $namaInvoice);
+        }
+        else {
+            $data['dp_invoice'] = $request->dp_invoice_old;
+        }
+        $find = transaction::find($request->armada_id);
+        // dd($find);
+        $find->update($request->all());
+
+        return redirect()->route('katalog.index');
+
     }
 }

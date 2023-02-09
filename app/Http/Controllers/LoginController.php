@@ -22,15 +22,23 @@ class LoginController extends Controller
             'email' => 'required',
             'password' => 'required'
         ]);
-        // dd($request);
-        
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        $find = User::where('email', $request->email)->first();
+        // dd($find->id);
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password]) && $find->id == 1 ) {
             $request->session()->regenerate();
             $user = User::where('email', $request->email)->first();
             $id         = $request->session()->put('id', $user->id);
             $username   = $request->session()->put('username', $user->username);
             $nama       = $request->session()->put('email', $user->email);
             return redirect()->intended(route('dashboard'));
+        }
+        else if (Auth::attempt(['email' => $request->email, 'password' => $request->password]) && $find->id != 1) {
+            $request->session()->regenerate();
+            $user = User::where('email', $request->email)->first();
+            $id         = $request->session()->put('id', $user->id);
+            $username   = $request->session()->put('username', $user->username);
+            $nama       = $request->session()->put('email', $user->email);
+            return redirect()->intended(route('home.index'));
         }
 
         

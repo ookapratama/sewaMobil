@@ -16,6 +16,6 @@ class ArmadaSeeder extends Seeder
      */
     public function run()
     {
-        Armada::factory()->count(15)->create();
+        Armada::factory()->count(5)->create();
     }
 }

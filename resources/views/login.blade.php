@@ -34,6 +34,7 @@
                                         <button id="login" class="btn btn-block login-btn mb-4"
                                         type="submit">Login</button>
                                     </form>
+                                    <a href="{{ route('forget') }} " class="text-secondary">Forget Password ? </a>
                                     <p class="login-card-footer-text">Don't have an account? <a href="/signup"
                                             class="text-reset">Register here</a></p>
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ForgetController;
 use App\Http\Controllers\SignupController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -27,27 +28,31 @@ use App\Http\Controllers\TransactionController;
 //  Route::get('/', [LoginController::class, 'index']);
 
 //User View
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/aboutus', [AboutUsController::class, 'index']);
 Route::get('/katalog', [ArmadaController::class, 'index'])->name('katalog.index');
 Route::get('/testimoni', [TestimoniController::class, 'index']);
+
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login.cek');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('/forget', [ForgetController::class, 'index'])->name('forget');
+Route::put('/forget', [ForgetController::class, 're_pass'])->name('re-pass');
+
 Route::get('/signup', [SignupController::class, 'index']);
 Route::post('/signup', [SignupController::class, 'store'])->name('sign.store');
 
-Route::get('/checkout', function () {
-    return view('/checkout', [
-        "title" => "Checkout",
-    ]);
-});
+Route::get('/checkout/{id}', [TransactionController::class, 'checkout'])->name('checkout');
+Route::post('/checkout', [TransactionController::class, 'checkout_store'])->name('checkout.store');
+Route::get('/payment', [TransactionController::class, 'payment'])->name('payment');
+Route::put('/payment', [TransactionController::class, 'payment_store'])->name('payment.store');
 
-Route::get('/payment', function () {
-    return view('/payment', [
-        "title" => "Payment",
-    ]);
-});
+// Route::get('/payment', function () {
+//     return view('/payment', [
+//         "title" => "Payment",
+//     ]);
+// });
 
 Route::get('/finishorder', function () {
     return view('/finish_order', [

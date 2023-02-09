@@ -24,7 +24,7 @@
                         <tbody>
                             @foreach ($transactions as $data)
                                 <tr>
-                                    <th scope="row">00{{ $data->id }}</a></th>
+                                    <th scope="row">{{ $data->bookingcode }}</a></th>
                                     <td>{{ $data->fullname }}</td>
                                     <td>{{ $data->start_date }} </a></td>
                                     <td>{{ $data->end_date }}</td>

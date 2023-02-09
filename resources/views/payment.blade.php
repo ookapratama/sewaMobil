@@ -33,7 +33,9 @@
                         </div>
                         <h5> A/N SUBHAN TAUFIK </h5>
                     </div>
-                    <form>
+                    <form action="{{ route('payment.store') }}" method="post" enctype="multipart/form-data">
+                        @method('PUT')
+                        @csrf
                         <fieldset>
                             {{-- <div class="form-group">
                     <label for="formFile">Nama Pemilik Rekening</label>
@@ -54,12 +56,14 @@
                         </select>
                     </div>
                 </div> --}}
+                            <input type="hidden" name="armada_id" value="{{ $armada->id }}">
                             <div class="form-group">
                                 <label for="formFile">Upload Bukti Pembayaran</label>
-                                <input class="form-control" type="file" id="formFile">
+                                <input class="form-control" type="file" name="dp_invoice" id="formFile">
                                 <span class="text-muted small">Silahkan Transfer sesuai nominal DP (50%) </span>
                             </div>
                             <div class="form-group"></div>
+                            <a href="{{ route('checkout', $armada->id) }}" class="btn btn-primary">Kembali</a>
                             <button type="submit" class="btn btn-primary">Pesan</button>
                         </fieldset>
                     </form>
@@ -72,24 +76,26 @@
                             <h5 class="text-uppercase mb-4">Pesanan Anda</h5>
                             <ul class="list-unstyled mb-0">
                                 <li class="d-flex align-items-center justify-content-between"><strong
-                                        class="small fw-bold">Rush TRD Sportivo</strong><span class="text-muted small">Rp.
-                                        1.200.000</span> </li>
-                                <span class="text-muted small">Rp. 400.000 x 3</span>
+                                        class="small fw-bold">{{ $armada->name }} </strong><span
+                                        class="text-muted small">Rp.
+                                        {{ number_format($total, 0, ',', '.') }}</span> </li>
+                                <span class="text-muted small">Rp. {{ number_format($armada->price, 0, ',', '.') }} x
+                                    {{ $trans }} </span>
+
                                 <li class="border-bottom my-2"></li>
                                 <li class="d-flex align-items-center justify-content-between"><strong
-                                        class="small fw-bold">Lepas Kunci</strong><span class="text-muted small">Rp.
-                                        0</span></li>
+                                        class="small fw-bold">Layanan Pengantaran</strong>
+                                    <span class="text-muted small">
+                                        Rp. {{ number_format($biaya_antar, 0, ',', '.') }}
+                                    </span>
+                                </li>
                                 <li class="border-bottom my-2"></li>
                                 <li class="d-flex align-items-center justify-content-between"><strong
-                                        class="small fw-bold">Layanan Pengantaran</strong><span class="text-muted small">
-                                        Rp. 0</span></li>
-                                <li class="border-bottom my-2"></li>
-                                <li class="d-flex align-items-center justify-content-between"><strong
-                                        class="text-uppercase small fw-bold">Total</strong><span>Rp. 1.200.000</span></li>
+                                        class="text-uppercase small fw-bold">Total</strong><span>Rp. {{ number_format($total + $biaya_antar, 0, ',', '.') }}</span></li>
                                 <li class="border-bottom my-2"></li>
                                 <li class="d-flex align-items-center justify-content-between"><strong
                                         class="text-uppercase small fw-bold" style="color: red">DP (50%)</strong><span>Rp.
-                                        600.000</span></li>
+                                            {{ number_format($total / 2, 0, ',', '.') }}</span></li>
                                 <span class="text-muted small">*Total DP 50% dari Total Penyewaan Mobil </span>
                             </ul>
                         </div>

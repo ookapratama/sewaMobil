@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('transmission', ['matic','manual']);
             $table->string('plat', '10')->nullable();
             $table->enum('status', ['available','booked']) ->default('available');
+            // $table->string('user_id');
             $table->timestamps();
         });
     }

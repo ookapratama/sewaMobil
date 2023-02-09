@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id('id');
-            // $table->foreignId('user_id');
+            $table->string('user_id');
             $table->string('fullname')->nullable();
             $table->string('armada_id');
-            // $table->string('bookingcode');
-            // $table->double('total', '30');
+            $table->string('bookingcode');
+            $table->bigInteger('total');
             $table->string('no_telp', '15')->nullable();
             $table->date('start_date');
             $table->date('end_date');

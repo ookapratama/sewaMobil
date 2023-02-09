@@ -18,10 +18,12 @@
                         <p class="product-desc"> {{ strtoupper($data->transmission) }} - {{ strtoupper($data->status) }}
                         </p>
                         <p class="product-price"> Rp. {{ number_format($data->price, 0, ',', '.') }} </p>
-                        <div class="btn-wrapper"> <button type="button" data-bs-toggle="modal"
-                                data-bs-target="#scrollingModal"
-                                class="btn {{ $data->status == 'booked' ? 'disabled' : '' }} btn-add-to-cart">
-                                Pesan</button></div>
+                        <div class="btn-wrapper">
+                            {{-- <a href="{{ route('checkout', Session()->get('id', '')) }} "  --}}
+                            <a href="{{ route('checkout', $data->id )}}" 
+                                class="btn {{ Session()->get('username') == "" ? 'disabled' : '' }} btn-add-to-cart">
+                                Pesan</a>
+                        </div>
                     </div>
                 @endforeach
             </div>
