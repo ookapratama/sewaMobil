@@ -37,25 +37,7 @@
                         @method('PUT')
                         @csrf
                         <fieldset>
-                            {{-- <div class="form-group">
-                    <label for="formFile">Nama Pemilik Rekening</label>
-                    <input type="text" id="" class="form-control" placeholder="Nama Lengkap">
-                </div>
-                <div class="form-group">
-                    <label for="form-group">Bank</label>
-                    <div class="input-group mb-3">
-                        <select class="form-select" id="inputGroupSelect01">
-                            <option selected> BCA (Bank Central Asia)</option>
-                            <option value="1">BNI (Bank Negara Indonesia)</option>
-                            <option value="2">Mandiri</option>
-                            <option value="3">BRI (Bank Rakyat Indonesia)</option>
-                            <option value="4">BTN/BTPN</option>
-                            <option value="5">BCA (Bank Central Asia)</option>
-                            <option value="6">CIMB Niaga</option>
-                            <option value="7">Lain-Lain</option>
-                        </select>
-                    </div>
-                </div> --}}
+
                             <input type="hidden" name="id_trans" value="{{ $id_trans }}">
                             <div class="form-group">
                                 <label for="formFile">Upload Bukti Pembayaran</label>
@@ -70,40 +52,55 @@
                 </div>
 
                 <!-- ORDER SUMMARY-->
-                <div class="col-lg-6">
-                    <div class="card border-0 rounded-0 p-lg-4 bg-light">
-                        <div class="card-body">
-                            <h5 class="text-uppercase mb-4">Pesanan Anda</h5>
-                            <ul class="list-unstyled mb-0">
-                                <li class="d-flex align-items-center justify-content-between"><strong
-                                        class="small fw-bold">{{ $armada->name }} </strong><span
-                                        class="text-muted small">Rp.
-                                        {{ number_format($total, 0, ',', '.') }}</span> </li>
-                                <span class="text-muted small">Rp. {{ number_format($armada->price, 0, ',', '.') }} x
-                                    {{ $trans }} </span>
 
-                                <li class="border-bottom my-2"></li>
-                                <li class="d-flex align-items-center justify-content-between"><strong
-                                        class="small fw-bold">Layanan Pengantaran</strong>
-                                    <span class="text-muted small">
-                                        Rp. {{ number_format($biaya_antar, 0, ',', '.') }}
-                                    </span>
-                                </li>
-                                <li class="border-bottom my-2"></li>
-                                <li class="d-flex align-items-center justify-content-between"><strong
-                                        class="text-uppercase small fw-bold">Total</strong><span>Rp. {{ number_format($total + $biaya_antar, 0, ',', '.') }}</span></li>
-                                <li class="border-bottom my-2"></li>
-                                <li class="d-flex align-items-center justify-content-between"><strong
-                                        class="text-uppercase small fw-bold" style="color: red">DP (50%)</strong><span>Rp.
+                <div class="col-lg-6">
+                    <form action="{{ route('payment.print', $id_trans) }} " method="POST">
+                        @csrf
+                        <div class="card border-0 rounded-0 p-lg-4 bg-light">
+                            <div class="card-body">
+                                <h5 class="text-uppercase mb-4">Pesanan Anda</h5>
+                                <input type="hidden" name="armada_name" value="{{ $armada->name }} ">
+                                <input type="hidden" name="total" value="{{ $total }} ">
+                                <input type="hidden" name="price" value="{{ $armada->price }} ">
+                                <input type="hidden" name="biaya_antar" value="{{ $biaya_antar }} ">
+                                <input type="hidden" name="durasi_sewa" value="{{ $trans }} ">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="d-flex align-items-center justify-content-between">
+                                        <strong class="small fw-bold">{{ $armada->name }}
+                                        </strong>
+                                        <span class="text-muted small">Rp.
+                                            {{ number_format($total, 0, ',', '.') }}
+                                        </span>
+                                    </li>
+                                    <span class="text-muted small">Rp. {{ number_format($armada->price, 0, ',', '.') }} x
+                                        {{ $trans }} </span>
+
+                                    <li class="border-bottom my-2"></li>
+                                    <li class="d-flex align-items-center justify-content-between"><strong
+                                            class="small fw-bold">Layanan Pengantaran</strong>
+                                        <span class="text-muted small">
+                                            Rp. {{ number_format($biaya_antar, 0, ',', '.') }}
+                                        </span>
+                                    </li>
+                                    <li class="border-bottom my-2"></li>
+                                    <li class="d-flex align-items-center justify-content-between"><strong
+                                            class="text-uppercase small fw-bold">Total</strong><span>Rp.
+                                            {{ number_format($total + $biaya_antar, 0, ',', '.') }}</span></li>
+                                    <li class="border-bottom my-2"></li>
+                                    <li class="d-flex align-items-center justify-content-between"><strong
+                                            class="text-uppercase small fw-bold" style="color: red">DP
+                                            (50%)</strong><span>Rp.
                                             {{ number_format($total / 2, 0, ',', '.') }}</span></li>
-                                <span class="text-muted small">*Total DP 50% dari Total Penyewaan Mobil </span>
-                            </ul>
-                                <a href="{{ route('payment.print') }} " class="btn btn-primary">print bukti</a>
-                        </div>
-                    </div>
+                                    <span class="text-muted small">*Total DP 50% dari Total Penyewaan Mobil </span>
+                                </ul>
+                                <button type="submit" class="btn btn-primary">print bukti</button>
+
+                    </form>
                 </div>
             </div>
-        </section>
+    </div>
+    </div>
+    </section>
     </div>
     </div>
     </section>

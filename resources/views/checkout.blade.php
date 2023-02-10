@@ -118,6 +118,7 @@
 
                         </div>
                     </form>
+                    <a href="{{ route('view_print') }} ">tes view</a>
                 </div>
             </div>
         </section>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoretransactionRequest;
 use App\Http\Requests\UpdatetransactionRequest;
+use PDF;
+// use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use App\Models\Armada;
 use App\Models\transaction;
@@ -204,15 +206,15 @@ class TransactionController extends Controller
         $data['ktp'] = $namaKtp;
         $data['sim'] = $namaSim;
         $biaya = 0;
-        if ($data['total'] != 0) {
-            if ($data['biaya_antar'] == 'utara') {
-                $biaya = 20000;
-            } else if ($data['biaya_antar'] == 'timur' || $data['biaya_antar'] == 'tengah' || $data['biaya_antar'] == 'barat') {
-                $biaya = 30000;
-            } else if ($data['biaya_antar'] == 'selatan') {
-                $biaya = 25000;
-            }
+
+        if ($data['biaya_antar'] == 'utara') {
+            $biaya = 20000;
+        } else if ($data['biaya_antar'] == 'timur' || $data['biaya_antar'] == 'tengah' || $data['biaya_antar'] == 'barat') {
+            $biaya = 30000;
+        } else if ($data['biaya_antar'] == 'selatan') {
+            $biaya = 25000;
         }
+
         $total = $armada->price * $request->durasi_sewa;
         // dd($total);  
 
@@ -260,8 +262,39 @@ class TransactionController extends Controller
 
     }
 
-    public function print_payment()
+    public function print_payment(Request $request)
     {
+        $trans = transaction::find($request->id_trans);
+        $armada1 = $request->armada_name;
+        $total = $request->total;
+        $price = $request->price;
+        $biaya_antar = $request->biaya_antar;
+        $durasi_sewa = $request->durasi_sewa;
 
+        $tes = 'Bukti';
+        $data1 = $request->all();
+
+        $d = array (
+            'title' => 'Bukti',
+            'data' => $data1,
+            
+        );
+        $customPaper = array(0,0,400,500);
+        // dd($d);
+        $pdf = PDF::loadview('bukti', [
+            'data' => $data1,
+            'title' => $tes, 
+            'armada' => $armada1, 
+            'total' => $total, 
+            'price' => $price, 
+            'biaya_antar' => $biaya_antar, 
+            'durasi_sewa' => $durasi_sewa, 
+            ])->setPaper($customPaper, 'landscape');
+        
+        return $pdf->download('tes1.pdf');
+    }
+
+    public function view_print () {
+        return view('bukti');
     }
 }
