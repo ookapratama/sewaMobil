@@ -30,39 +30,37 @@
                         <ul class="list-unstyled">
                             <li class="text-black">Septi Intan</li>
                             <li class="text-muted mt-1"><span class="text-black">Invoice</span> #12345</li>
-                            <li class="text-black mt-1">26 Januari 2023</li>
+                            <li class="text-black mt-1">{{ $time }}</li>
                         </ul>
                         <div class="card-body">
                             <h5 class="text-uppercase mb-4">Pesanan Anda</h5>
                             <ul class="list-unstyled mb-0">
                                 <li class="d-flex align-items-center justify-content-between"><strong
-                                        class="small fw-bold">Rush TRD Sportivo</strong><span class="text-muted small">Rp.
-                                        1.200.000</span> </li>
-                                <span class="text-muted small">Rp. 400.000 x 3</span>
+                                        class="small fw-bold">{{ $armada }} </strong><span class="text-muted small">Rp.
+                                            {{ number_format($total, 0, ',', '.') }}</span> </li>
+                                <span class="text-muted small">Rp.  {{ number_format($price, 0, ',', '.') }} x  {{ $durasi_sewa }}</span>
                                 <li class="border-bottom my-2"></li>
-                                <li class="d-flex align-items-center justify-content-between"><strong
-                                        class="small fw-bold">Lepas Kunci</strong><span class="text-muted small">Rp.
-                                        0</span></li>
+                                
                                 <li class="border-bottom my-2"></li>
                                 <li class="d-flex align-items-center justify-content-between"><strong
                                         class="small fw-bold">Layanan Pengantaran</strong><span class="text-muted small">
-                                        Rp. 0</span></li>
+                                        Rp. {{ number_format($biaya_antar, 0, ',', '.') }}</span></li>
                                 <li class="border-bottom my-2"></li>
                                 <li class="d-flex align-items-center justify-content-between"><strong
-                                        class="text-uppercase small fw-bold">Total</strong><strong>Rp. 1.200.000</strong>
+                                        class="text-uppercase small fw-bold">Total</strong><strong>Rp.  {{ number_format($total + $biaya_antar, 0, ',', '.') }}</strong>
                                 </li>
                                 <li class="border-bottom my-2"></li>
                                 <li class="d-flex align-items-center justify-content-between"><strong
                                         class="text-uppercase small fw-bold" style="color: red">DP (50%)</strong><strong>Rp.
-                                        600.000</strong></li>
+                                            {{ number_format($total / 2, 0, ',', '.') }}</strong></li>
                                 <span class="text-muted small">*Total DP 50% dari Total Penyewaan Mobil </span>
-                                <li class="border-bottom my-2"></li>
+                                {{-- <li class="border-bottom my-2"></li>
                                 <li class="d-flex align-items-center justify-content-between"><strong
-                                        class="text-uppercase small">Sisa Pembayaran</strong><span>Rp. 600.000</span></li>
+                                        class="text-uppercase small">Sisa Pembayaran</strong><span>Rp. 600.000</span></li> --}}
                             </ul>
                         </div>
                         <div class="text-center">
-                            <a href="/profile/#"><u class="text">View in my profile</u></a>
+                            <a href="/profile"><u class="text">View in my profile</u></a>
                         </div>
                         <div class="text-center">
                             <a>Pertanyaan lebih lanjut hubungi admin</a> <a href="https://wa.me/085247768054">(Chat Now)</a>

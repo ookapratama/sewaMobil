@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoretransactionRequest;
 use App\Http\Requests\UpdatetransactionRequest;
+use Carbon\Carbon;
 use PDF;
 // use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
@@ -247,6 +248,7 @@ class TransactionController extends Controller
         // dd($request->id_trans);
         $data = $request->all();
         $find = transaction::find($request->id_trans);
+        $armada = Armada::find($request->armada_id);
 
         // validasi gambar
 
@@ -257,8 +259,24 @@ class TransactionController extends Controller
 
         $find->update($data);
 
+        $armada1 = $request->armada_name;
+        $total = $request->total;
+        $price = $request->price;
+        $biaya_antar = $request->biaya_antar;
+        $durasi_sewa = $request->durasi_sewa;
+        $tgl_skrg = Carbon::now()->isoFormat('D MMMM Y');
+        // dd($total);
 
-        return redirect()->route('katalog.index');
+        return view('finish_order', [
+            // 'data' => $data,
+            'title' => 'Order Complete', 
+            'armada' => $armada1, 
+            'total' => $total, 
+            'price' => $price, 
+            'biaya_antar' => $biaya_antar, 
+            'durasi_sewa' => $durasi_sewa,
+            'time'  => $tgl_skrg
+        ] );
 
     }
 
@@ -292,6 +310,10 @@ class TransactionController extends Controller
             ])->setPaper($customPaper, 'landscape');
         
         return $pdf->download('tes1.pdf');
+    }
+
+    public function finish_order () {
+
     }
 
     public function view_print () {

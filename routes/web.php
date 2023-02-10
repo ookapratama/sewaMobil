@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ForgetController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SignupController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -48,19 +49,17 @@ Route::post('/checkout', [TransactionController::class, 'checkout_store'])->name
 Route::get('/payment', [TransactionController::class, 'payment'])->name('payment');
 Route::put('/payment', [TransactionController::class, 'payment_store'])->name('payment.store');
 Route::post('/print_payment/{id1}', [TransactionController::class, 'print_payment'])->name('payment.print');
+// Route::get('/finishorder', [TransactionController::]);
 
-Route::get('/view_print', [TransactionController::class, 'view_print'])->name('view_print');
+// Route::get('/view_print', [TransactionController::class, 'view_print'])->name('view_print');
 // Route::get('/payment', function () {
 //     return view('/payment', [
 //         "title" => "Payment",
 //     ]);
 // });
 
-Route::get('/finishorder', function () {
-    return view('/finish_order', [
-        "title" => "Order Complete",
-    ]);
-});
+Route::get('/profile', [ProfileController::class, 'profile'])->name('user-profile');
+
 
 Route::get('/user-transaction', function () {
     return view('/useraccount_transaction', [
@@ -74,11 +73,11 @@ Route::get('/user-invoice', function () {
     ]);
 });
 
-Route::get('/user-profile', function () {
-    return view('/useraccount_profile', [
-        "title" => "User Profile",
-    ]);
-});
+// Route::get('/user-profile', function () {
+//     return view('/useraccount_profile', [
+//         "title" => "User Profile",
+//     ]);
+// });
 
 
 Route::get('/add-testimoni', [TestimoniController::class, 'testi_user'])->name('testi');

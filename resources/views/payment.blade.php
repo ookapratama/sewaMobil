@@ -36,6 +36,11 @@
                     <form action="{{ route('payment.store') }}" method="post" enctype="multipart/form-data">
                         @method('PUT')
                         @csrf
+                        <input type="hidden" name="armada_name" value="{{ $armada->name }} ">
+                        <input type="hidden" name="total" value="{{ $total }} ">
+                        <input type="hidden" name="price" value="{{ $armada->price }} ">
+                        <input type="hidden" name="biaya_antar" value="{{ $biaya_antar }} ">
+                        <input type="hidden" name="durasi_sewa" value="{{ $trans }} ">
                         <fieldset>
 
                             <input type="hidden" name="id_trans" value="{{ $id_trans }}">

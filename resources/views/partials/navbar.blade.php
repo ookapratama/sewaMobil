@@ -26,22 +26,27 @@
                     <li class="nav-item">
                         <a class="nav-link  {{ $title === 'About Us' ? 'active' : '' }}" href="/aboutus">About Us</a>
                     </li>
+                    {{-- @if (session()->has('username'))
+                        <li class="nav-item">
+                            <a class="nav-link  {{ $title === 'Profile' ? 'active' : '' }}" href="/profile">Profile</a>
+                        </li>
+                    @endif --}}
                     <li class="nav-item">
-                    @if (session()->has('username'))
-                    <div class="d-flex">
+                        @if (session()->has('username'))
+                            <div class="d-flex">
 
-                        <p class="mt-2 ms-2">
-                            Welcome, {{ Session()->get('username', '') }}
-                            {{-- Welcome,{{ Session()->get('id', '') }} --}}
-                        </p>
-                        <a class="nav-item btn btn-primary text-white tombol ml-5" href="{{ route('logout') }}"
-                            role="button">Logout</a>
-                    </div>
-                    @else
-                        <a class="nav-item btn btn-primary text-white tombol ml-5" href="/login"
-                            role="button">Login</a>
-                    @endif
-                </li>
+                                <p class="mt-2 ms-2">
+                                    Welcome, {{ Session()->get('username', '') }}
+                                    {{-- Welcome,{{ Session()->get('id', '') }} --}}
+                                </p>
+                                <a class="nav-item btn btn-primary text-white tombol ml-5" href="{{ route('logout') }}"
+                                    role="button">Logout</a>
+                            </div>
+                        @else
+                            <a class="nav-item btn btn-primary text-white tombol ml-5" href="/login"
+                                role="button">Login</a>
+                        @endif
+                    </li>
 
                 </ul>
             </div>
