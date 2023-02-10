@@ -26,7 +26,7 @@
                 <div class="col-lg-12">
                     <form action="{{ route('checkout.store' ) }}"  method="POST" enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" name="id" value="{{ $armada->id }}">
+                        <input type="hidden" name="id" value="">
                         <input type="hidden" name="user_id" value="{{ Session()->get('id', '') }}">
                         <input type="hidden" name="armada_id" value="{{ $armada->id }} ">
                         <div class="row gy-3">

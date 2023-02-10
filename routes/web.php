@@ -47,6 +47,7 @@ Route::get('/checkout/{id}', [TransactionController::class, 'checkout'])->name('
 Route::post('/checkout', [TransactionController::class, 'checkout_store'])->name('checkout.store');
 Route::get('/payment', [TransactionController::class, 'payment'])->name('payment');
 Route::put('/payment', [TransactionController::class, 'payment_store'])->name('payment.store');
+Route::get('/print_payment', [TransactionController::class, 'print_payment'])->name('payment.print');
 
 // Route::get('/payment', function () {
 //     return view('/payment', [

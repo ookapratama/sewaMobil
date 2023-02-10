@@ -21,11 +21,13 @@ class TransactionController extends Controller
     {
         $transactions = transaction::all();
         $armada = Armada::where('status', 'available')->get();
-        return view('/admin/transaction', [
-            "title" => "Transaction",
-            "transactions" => $transactions,
-            "armadas" => $armada
-        ]
+        return view(
+            '/admin/transaction',
+            [
+                "title" => "Transaction",
+                "transactions" => $transactions,
+                "armadas" => $armada
+            ]
         );
     }
 
@@ -120,9 +122,10 @@ class TransactionController extends Controller
         return redirect()->route('transaksi.index');
     }
 
-    public function update_admin (UpdatetransactionRequest $request) {
+    public function update_admin(UpdatetransactionRequest $request)
+    {
         // dd($request->all());
-        
+
         $find = transaction::find($request->id);
         // dd($request->hasFile('dp_invoice') || $request->hasFile('ktp') || $request->hasFile('sim') );
         $data = $request->all();
@@ -137,8 +140,7 @@ class TransactionController extends Controller
             $request->dp_invoice->move(public_path('image/invoice/'), $namaInvoice);
             $request->ktp->move(public_path('image/ktp/'), $namaKtp);
             $request->sim->move(public_path('image/sim/'), $namaSim);
-        }
-        else {
+        } else {
             $data['dp_invoice'] = $request->dp_invoice_old;
             $data['ktp'] = $request->ktp_old;
             $data['sim'] = $request->sim_old;
@@ -152,7 +154,7 @@ class TransactionController extends Controller
 
         // dd($data);
         $find->update($data);
-        return redirect()->route('transaksi.index');    
+        return redirect()->route('transaksi.index');
     }
 
     /**
@@ -170,10 +172,11 @@ class TransactionController extends Controller
 
         $find_armada->update();
         $find->delete();
-        return redirect()->route('transaksi.index');  
+        return redirect()->route('transaksi.index');
     }
 
-    public function checkout ($id) {
+    public function checkout($id)
+    {
 
         $find = Armada::find($id);
         // dd($find); 
@@ -181,13 +184,16 @@ class TransactionController extends Controller
         return view('checkout', ['title' => 'Checkout', 'armada' => $find]);
     }
 
-    public function checkout_store (Request $request ) {
+    public function checkout_store(Request $request)
+    {
 
         $find = User::find($request->id);
         $armada = Armada::find($request->armada_id);
 
         $data = $request->all();
-        // dd($request->total);
+
+        // $id = $this->create($data)->id;
+        // dd($id);
 
         $namaKtp = time() . '.' . $request->ktp->extension();
         $namaSim = time() . '.' . $request->sim->extension();
@@ -205,51 +211,57 @@ class TransactionController extends Controller
                 $biaya = 30000;
             } else if ($data['biaya_antar'] == 'selatan') {
                 $biaya = 25000;
-            } 
+            }
         }
         $total = $armada->price * $request->durasi_sewa;
         // dd($total);  
 
         $data['total'] = $total;
-        
-        transaction::create($data);
 
-        
+        $tr = transaction::create($data);
+        // dd($tr->id);
+        $id_trans = $tr->id;
 
         $uang = array(
-            'biaya_antar'   => $biaya,
-            'total'         => $total,
-            'armada'        => $armada,
-            'title'         => 'Payment',
-            'trans'         => $data['durasi_sewa']
+            'biaya_antar' => $biaya,
+            'total' => $total,
+            'armada' => $armada,
+            'title' => 'Payment',
+            'trans' => $data['durasi_sewa'],
+            'id_trans' => $id_trans
         );
 
         return view('payment', $uang);
     }
 
-    public function payment () {
-    
+    public function payment()
+    {
+
         return view('payment', ['title' => 'Payment']);
     }
 
-    public function payment_store(Request $request) {
-        // dd($request->all());
+    public function payment_store(Request $request)
+    {
+        // dd($request->id_trans);
+        $data = $request->all();
+        $find = transaction::find($request->id_trans);
 
         // validasi gambar
-        if ($request->hasFile('dp_invoice')) {
 
-            $namaInvoice = time() . '.' . $request->dp_invoice->extension();
-            // dd($nama);
-            $request->dp_invoice->move(public_path('image/invoice/'), $namaInvoice);
-        }
-        else {
-            $data['dp_invoice'] = $request->dp_invoice_old;
-        }
-        $find = transaction::find($request->armada_id);
-        // dd($find);
-        $find->update($request->all());
+        $namaInvoice = time() . '.' . $request->dp_invoice->extension();
+        // dd($nama);
+        $request->dp_invoice->move(public_path('image/invoice/'), $namaInvoice);
+        $data['dp_invoice'] = $namaInvoice;
+
+        $find->update($data);
+
 
         return redirect()->route('katalog.index');
+
+    }
+
+    public function print_payment()
+    {
 
     }
 }

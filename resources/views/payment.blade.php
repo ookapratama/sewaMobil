@@ -56,10 +56,10 @@
                         </select>
                     </div>
                 </div> --}}
-                            <input type="hidden" name="armada_id" value="{{ $armada->id }}">
+                            <input type="hidden" name="id_trans" value="{{ $id_trans }}">
                             <div class="form-group">
                                 <label for="formFile">Upload Bukti Pembayaran</label>
-                                <input class="form-control" type="file" name="dp_invoice" id="formFile">
+                                <input class="form-control" type="file" name="dp_invoice" id="formFile" required>
                                 <span class="text-muted small">Silahkan Transfer sesuai nominal DP (50%) </span>
                             </div>
                             <div class="form-group"></div>
@@ -98,6 +98,7 @@
                                             {{ number_format($total / 2, 0, ',', '.') }}</span></li>
                                 <span class="text-muted small">*Total DP 50% dari Total Penyewaan Mobil </span>
                             </ul>
+                                <a href="{{ route('payment.print') }} " class="btn btn-primary">print bukti</a>
                         </div>
                     </div>
                 </div>
