@@ -120,10 +120,11 @@ class TransactionController extends Controller
 
         $find_armada['status'] = 'booked';
 
-        if ($request->btn == 'booked') {
+        if ($request->btn == 'success') {
             $find['status'] = 'success';
         } else {
             $find['status'] = 'completed';
+            $find_armada['status'] = 'available';
         }
 
         $find_armada->update($data);

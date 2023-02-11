@@ -25,7 +25,7 @@
                             @foreach ($transactions as $data)
                                 <tr>
                                     {{-- kilk booking code arahkan ke transaction_id --}}
-                                    <th scope="row">{{ $data->bookingcode }}</th>
+                                    <th scope="row"> <a href="{{ route('transaksi.detail', $data->id) }} "> {{ $data->bookingcode }} </a></th>
                                     <td>{{ $data->fullname }}</td>
                                     <td>{{ $data->start_date }} </a></td>
                                     <td>{{ $data->end_date }}</td>

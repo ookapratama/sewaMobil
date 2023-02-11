@@ -18,7 +18,7 @@
                                             <input type="hidden" name="id" value="{{ $transaksi->id }}">
                                             <input type="hidden" name="armada_id" value="{{ $transaksi->armada->id }}">
                                             <th>ID Transaction</th>
-                                            <td><b> {{ $transaksi->bookingcode }} </b></td>
+                                            <td> <b> {{ $transaksi->bookingcode }} </b></td>
                                         </tr>
                                         <tr>
                                             <th>Nama </th>
