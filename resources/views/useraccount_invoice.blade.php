@@ -16,7 +16,7 @@
                                         src="/image/classic-portrait-silhouette-man.jpg" alt="User">
                                 </div>
                                 <div class="user-data">
-                                    <h4> Nama Pelanggan </h4>
+                                    <h4> Selamat Datang! </h4>
                                 </div>
                             </div>
                         </aside>
@@ -26,7 +26,6 @@
                     <div class="col-lg-8 border">
                         <div class="padding-top-2x mt-2 hidden-lg-up"></div>
                         <!-- Invoice -->
-
                         <body>
                             <img src="/image/logo.png" alt="logo" height="50">
                             <table class="table mt-2">
@@ -100,7 +99,6 @@
                                                 </p>
                                             @endif --}}
                                             <p> 08123456789 </p>
-
 
                                             {{-- @foreach ($invoice->seller->custom_fields as $key => $value)
                                                 <p class="seller-custom-field">

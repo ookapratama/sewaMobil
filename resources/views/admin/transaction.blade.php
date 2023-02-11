@@ -24,11 +24,13 @@
                         <tbody>
                             @foreach ($transactions as $data)
                                 <tr>
-                                    <th scope="row">{{ $data->bookingcode }}</a></th>
+                                    {{-- kilk booking code arahkan ke transaction_id --}}
+                                    <th scope="row">{{ $data->bookingcode }}</th>
                                     <td>{{ $data->fullname }}</td>
                                     <td>{{ $data->start_date }} </a></td>
                                     <td>{{ $data->end_date }}</td>
                                     <td>{{ $data->armada->name }}</td>
+                                    {{-- total transaksi tanpa biaya supir dan pengantaran --}}
                                     <td>Rp. {{ number_format($data->armada->price, 0, ',', '.') }} </td>
                                     <td><span
                                             class="badge bg-{{ $data->status == 'success' ? 'success' : 'primary' }} rounded">{{ $data->status }}</span>
@@ -50,13 +52,15 @@
                                                 class="btn me-2 editBtn btn-primary">
                                                 <i class="bi bi-pencil-square"></i>
                                             </button>
+                                            {{-- transaksi pending : default (warna warning)
+                                                transaksi success : pembayaran diterima (warna success)
+                                                transaksi completed : penyewaan berakhir (warna primary) --}}
                                             <a href="{{ route('transaksi.detail', $data->id) }}"
                                                 class="btn  btn-{{ ($data->status == 'success') ? 'success disabled' : (($data->status == 'completed') ? 'success disabled' : 'warning')}}">
                                                 {{ ($data->status == 'success') ? 'Sudah dibayar' : (($data->status == 'completed') ? 'Pembayaran Selesai' : 'Proses Dibayar')}}
                                             </a>
                                         </div>
                                     </td>
-                                    {{-- {{ $data -> status == 'success' ? 'bg-success' : 'bg-warning' }} --}}
                                 </tr>
                             @endforeach
                         </tbody>

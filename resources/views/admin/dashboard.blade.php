@@ -23,12 +23,11 @@
                         </div>
                     </div>
 
-                   
 
                     <div class="col-xxl-4 col-md-6">
                         <div class="card info-card customers-card">
                             <div class="card-body">
-                                <h5 class="card-title"><a href="{{ route('cars.index') }} ">Driver</a> <span>| All</span></h5>
+                                <h5 class="card-title"><a href="{{ route('cars.index') }} ">Armada</a> <span>| All</span></h5>
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="bx bxs-car-garage"></i></div>
@@ -79,7 +78,7 @@
                             <div class="ps-3">
                                 <h6> {{ $testimoni }} </h6>
                                 {{-- {{ ($armada->id)->count()}} --}}
-                                
+
                             </div>
                         </div>
                     </div>

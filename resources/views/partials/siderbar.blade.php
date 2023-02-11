@@ -27,7 +27,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {{ $title == 'review' ? 'active' : 'collapsed' }}" href="{{route('testi.index') }}"> <i
+                <a class="nav-link {{ $title == 'Testimoni' ? 'active' : 'collapsed' }}" href="{{route('testi.index') }}"> <i
                         class="bx bx-comment-edit"> </i> <span> Testimoni</span> </a>
             </li>
 

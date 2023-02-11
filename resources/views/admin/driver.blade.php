@@ -21,7 +21,6 @@
                             <tr>
                                 <th scope="col">No.</th>
                                 <th scope="col">Driver Name</th>
-                                <th scope="col">Armada</th>
                                 <th scope="col">Phone Number</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Action</th>
@@ -33,10 +32,9 @@
                                 <tr>
                                     <th scope="row"> {{ ++$i }}</a></th>
                                     <td><span> {{ $driver->name }} </span></td>
-                                    <td><span> {{ $driver->name }} </span></td>
                                     <td>{{ $driver->phone }}</td>
                                     <td>
-                                        <button class="btn btn-{{ $driver->status == 'available' ? 'primary' : 'secondary'}}">{{ $driver->status }}</button> 
+                                        <button class="btn btn-{{ $driver->status == 'available' ? 'primary' : 'secondary'}}">{{ $driver->status }}</button>
                                         {{-- <button type="button" class="btn btn-success rounded-pill" data-bs-toggle="modal" data-bs-target="#verticalycentered"> Available </button>
                             <div class="modal fade" id="verticalycentered" tabindex="-1">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -75,15 +73,7 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            {{-- <tr>
-                        <th scope="row">#2457</a></th>
-                        <td><span>Driver 2 </span></td>
-                        <td>08325464323</td>
-                        <td>
-                            <button type="button" class="btn btn-warning rounded-pill" data-bs-toggle="tooltip" data-bs-placement="right" title="Finish?"> Assigned </button>
-                        </td>
-                        <td>Fortuner 4x4</td>
-                    </tr> --}}
+
                         </tbody>
                     </table>
                 </div>
@@ -115,10 +105,10 @@
                                     <select class="form-control" name="armada_id" id="">
                                         <option value="">Pilih Armada</option>
                                         @foreach ($armada as $item)
-                                            
+
                                         <option value="{{ $item->id }} "> {{ $item->name }} </option>
                                         @endforeach
-                                    
+
                                     </select>
                                 </div>
                             </div>
@@ -168,6 +158,16 @@
                                         required></input>
                                 </div>
                             </div>
+                            {{-- <div class="mb-3">
+                                <div class="col-md-12">
+                                    <label for="address">Status</label>
+                                    <select class="form-control" name="status" id="status_old">
+                                        <option value="matic">Available</option>
+                                        <option value="manual">Booked</option>
+                                    </select>
+                                </div>
+                            </div> --}}
+
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>

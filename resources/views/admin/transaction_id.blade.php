@@ -46,18 +46,21 @@
                                         </tr>
                                         <tr>
                                             <th>Total Transaksi</th>
-                                            <td>{{ $transaksi->armada->price }}</td>
+                                            {{-- total keseluruhan tanpa biaya pengantaran dan supir --}}
+                                            <td> Rp. {{ number_format($transaksi->armada->price, 0, ',', '.') }}</td>
                                         </tr>
                                         <tr>
                                             <th>KTP</th>
+                                            {{-- bagaimana caranya dilihat isinya --}}
                                             <td>{{ $transaksi->ktp }}</td>
                                         </tr>
                                         <tr>
                                             <th>SIM</th>
+                                            {{-- bagaimana caranya dilihat isinya --}}
                                             <td>{{ $transaksi->sim }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Total Pembayaran</th>
+                                            <th>Total DP (50%)</th>
                                             <td>Rp. {{ number_format($transaksi->armada->price, 0, ',', '.') }}</td>
                                         </tr>
                                         <tr>
@@ -81,7 +84,7 @@
                                 height="375" type="">
                             {{-- <embed src="{{ Storage::url($transaction->additional) }}" width="500" height="375" type="application/jpeg"> --}}
                         </div>
-                        <button class="btn btn-primary" value="success" name="btn" type="submit">Approved Pembayaran</button>
+                        <button class="btn btn-primary mb-2" value="success" name="btn" type="submit">Approved Pembayaran</button>
                         <button class="btn btn-success" value="completed" name="btn" type="submit">Completed Transaction</button>
 
                         </form>

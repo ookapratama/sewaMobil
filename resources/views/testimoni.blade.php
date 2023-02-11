@@ -27,7 +27,7 @@
                                 </div>
                                 <div class="post-meta">
                                 </div>
-                                <h5 class="post-title"> {{ $data['text'] }}</h5>
+                                <h5 class="post-title"> {{ $data['message'] }}</h5>
                             </div>
                         </div>
                     </div>

@@ -6,7 +6,8 @@
         <div class="oleez-loader"></div>
         <main class="contact-page">
             <div class="container">
-                <h1 class="oleez-page-title wow fadeInUp">Berikan Ulasan anda</h1>
+                {{-- <a href="/">back to homepage</a> --}}
+                <h3 class="oleez-page-title wow fadeInUp">Berikan Ulasan anda</h3>
                 <div class="row">
                     <div class="col-md-6 mb-5 mb-md-0 pr-lg-5 wow fadeInLeft">
                         <div class="embed-responsive">
@@ -24,8 +25,8 @@
                             <div class="form-group">
                                 <label for="carsname">*Car/Bus Name</label>
                                 <select name="car_name" class="form-select" aria-label="Default select example" id="car">
+                                    <option value="">Select </option>
                                     @foreach ($car as $item)
-                                        <option value="">Select </option>
                                         <option value="{{ $item->name }}">{{ $item->name }} </option>
                                     @endforeach
                                 </select>
