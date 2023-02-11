@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('armadas', function (Blueprint $table) {
             $table->id('id');
+            // $table->string('armada_id')->nullable();
             $table->string('name', 50);
             // $table->foreignId('transaction_id');
             $table->double('price');

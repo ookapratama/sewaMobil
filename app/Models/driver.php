@@ -9,7 +9,13 @@ class driver extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'armada_id',
         'name',
-        'phone'
+        'phone',
+        'status'
     ];
+
+    public function armada() {
+        return $this->hasOne(Armada::class, 'id' ,'armada_id');
+    }
 }

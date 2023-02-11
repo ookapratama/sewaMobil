@@ -27,9 +27,9 @@ class User extends Authenticatable
 
     // protected $guarded = [];  
 
-    public function transaction()
+    public function trans()
     {
-        return $this->hasMany(transaction::class, 'transaction_id','id');
+        return $this->hasOne(transaction::class, 'user_id', 'id');
     }
 
     public function testimoni()

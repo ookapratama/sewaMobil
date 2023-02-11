@@ -21,12 +21,10 @@
                             </div>
                         </aside>
                         <nav class="list-group">
-                            <a class="list-group-item with-badge" href="/user-profile"><i class=" fa fa-th"></i>Profile</a>
-                            <a class="list-group-item active" href="/user-transaction"><i
-                                    class="fa fa-user"></i>Transaksi</a>
+                            <a class="list-group-item active" href="{{ route('user-profile', ['id1' => $trans->user_id, 'id2' => $trans->id])}}"><i class=" fa fa-th"></i>Profile</a>
+                            <a class="list-group-item" href="{{ route('user-transaksi', $user)}}"><i class="fa fa-user"></i>Transaksi</a>
                             <a class="list-group-item" href="/user-invoice"><i class="fa fa-map"></i>Invoice</a>
                             <a class="list-group-item" href="/"><i class=""></i>Logout</a>
-
                         </nav>
                     </div>
                     <div class="col-lg-8">
@@ -44,12 +42,12 @@
                                         <td>
                                             <div class="product-item">
                                                 <div class="product-info">
-                                                    <h3 class="invoice-id"><a href="#"> <strong> #12345 </strong> </a>
+                                                    <h3 class="invoice-id"><a href="#"> <strong> {{ $trans->id }} </strong> </a>
                                                     </h3>
-                                                    <div class="text-lg text-bold"> Rush TRD</div>
-                                                    <div class="text-lg text-medium text-muted">Rp. 1.200.000</div>
+                                                    <div class="text-lg text-bold"> {{$trans->armada->name}} </div>
+                                                    <div class="text-lg text-medium text-muted">Rp. {{ number_format($trans->total, 0, ',', '.') }} </div>
                                                     <div>Status:
-                                                        <div class="d-inline text-success">Complete</div>
+                                                        <div class="d-inline text-{{ $trans->status == 'success' ? 'success' : 'warning'}}"> {{ $trans->status }} </div>
                                                     </div>
                                                 </div>
                                             </div>

@@ -45,11 +45,11 @@ class transaction extends Model
 
     public function armada()
     {
-        return $this->belongsTo(Armada::class, 'armada_id', 'id');
+        return $this->hasOne(Armada::class, 'id' , 'armada_id');
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id','id');
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 }

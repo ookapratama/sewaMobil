@@ -69,6 +69,8 @@
                                 <input type="hidden" name="price" value="{{ $armada->price }} ">
                                 <input type="hidden" name="biaya_antar" value="{{ $biaya_antar }} ">
                                 <input type="hidden" name="durasi_sewa" value="{{ $trans }} ">
+                                <input type="hidden" name="id_trans" value="{{ $id_trans }}">
+
                                 <ul class="list-unstyled mb-0">
                                     <li class="d-flex align-items-center justify-content-between">
                                         <strong class="small fw-bold">{{ $armada->name }}

@@ -265,7 +265,8 @@ class TransactionController extends Controller
         $biaya_antar = $request->biaya_antar;
         $durasi_sewa = $request->durasi_sewa;
         $tgl_skrg = Carbon::now()->isoFormat('D MMMM Y');
-        // dd($total);
+        $id_user = $find->user_id;
+        // dd($id_user);
 
         return view('finish_order', [
             // 'data' => $data,
@@ -275,7 +276,9 @@ class TransactionController extends Controller
             'price' => $price, 
             'biaya_antar' => $biaya_antar, 
             'durasi_sewa' => $durasi_sewa,
-            'time'  => $tgl_skrg
+            'time'  => $tgl_skrg,
+            'id_user' => $id_user,
+            'id_trans' => $request->id_trans
         ] );
 
     }
@@ -291,6 +294,7 @@ class TransactionController extends Controller
 
         $tes = 'Bukti';
         $data1 = $request->all();
+        // dd($request->id_trans);
 
         $d = array (
             'title' => 'Bukti',
@@ -308,8 +312,8 @@ class TransactionController extends Controller
             'biaya_antar' => $biaya_antar, 
             'durasi_sewa' => $durasi_sewa, 
             ])->setPaper($customPaper, 'landscape');
-        
-        return $pdf->download('tes1.pdf');
+
+        return $pdf->download($trans->bookingcode.'.pdf');
     }
 
     public function finish_order () {

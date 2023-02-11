@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoredriverRequest;
 use App\Http\Requests\UpdatedriverRequest;
+use App\Models\Armada;
 use App\Models\driver;
 use Illuminate\Http\Request;
 
@@ -17,9 +18,11 @@ class DriverController extends Controller
     public function index()
     {
         $drivers = driver::all();
+        $armada = Armada::where('status', 'available')->get();
         return view('/admin/driver', [
             "title" => "Driver",
-            "drivers" => $drivers
+            "drivers" => $drivers,
+            "armada"    => $armada
         ]);
     }
 
@@ -41,13 +44,14 @@ class DriverController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        // dd($request->all());
         $request->validate([
             'phone' => 'numeric|required',
             'name' => 'required'
         ]);
         $data = $request->all();
-        
+        // $data['status'] = 'booked';
         driver::create($data);
         // dd($request);
         return redirect()->route('driver.index');

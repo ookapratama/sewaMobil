@@ -20,8 +20,8 @@
                             </div>
                         </aside>
                         <nav class="list-group">
-                            <a class="list-group-item active" href="/user-profile"><i class=" fa fa-th"></i>Profile</a>
-                            <a class="list-group-item" href="/user-transaction"><i class="fa fa-user"></i>Transaksi</a>
+                            <a class="list-group-item active" href="{{ route('user-profile', ['id1' => $user, 'id2' => $trans])}}"><i class=" fa fa-th"></i>Profile</a>
+                            <a class="list-group-item" href="{{ route('user-transaksi', $trans)}}"><i class="fa fa-user"></i>Transaksi</a>
                             <a class="list-group-item" href="/user-invoice"><i class="fa fa-map"></i>Invoice</a>
                             <a class="list-group-item" href="/"><i class=""></i>Logout</a>
                         </nav>
@@ -36,11 +36,11 @@
                                 <div class="tab-content pt-2">
                                     <div class="tab-pane fade show active profile-overview" id="profile-overview">
                                         <h5 class="card-title">Email</h5>
-                                        <p class="label ">amaliasi19h@studet.unhas.ac.id</p>
-                                        <h5 class="card-title">Nomor Telepon</h5>
-                                        <p class="label ">085298201812</p>
+                                        <p class="label ">{{ $user->email }} </p>
+                                        <h5 class="card-title">Nomor </h5>
+                                        <p class="label ">{{ $user->trans->no_telp }} </p>
                                         <h5 class="card-title">Alamat</h5>
-                                        <p class="label ">xxxx</p>
+                                        <p class="label "> {{ $user->trans->alamat }} </p>
                                     </div>
                                 </div>
                             </div>

@@ -21,6 +21,7 @@
                             <tr>
                                 <th scope="col">No.</th>
                                 <th scope="col">Driver Name</th>
+                                <th scope="col">Armada</th>
                                 <th scope="col">Phone Number</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Action</th>
@@ -31,6 +32,7 @@
                             @foreach ($drivers as $i => $driver)
                                 <tr>
                                     <th scope="row"> {{ ++$i }}</a></th>
+                                    <td><span> {{ $driver->name }} </span></td>
                                     <td><span> {{ $driver->name }} </span></td>
                                     <td>{{ $driver->phone }}</td>
                                     <td>
@@ -109,11 +111,25 @@
                             </div>
                             <div class="mb-3">
                                 <div class="col-md-12">
+                                    <label for="name">Armada</label>
+                                    <select class="form-control" name="armada_id" id="">
+                                        <option value="">Pilih Armada</option>
+                                        @foreach ($armada as $item)
+                                            
+                                        <option value="{{ $item->id }} "> {{ $item->name }} </option>
+                                        @endforeach
+                                    
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="col-md-12">
                                     <label for="address">Phone Number</label>
                                     <input name="phone" class="form-control" placeholder="08xx..." required></input>
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" value="booked" name="status">
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
                             <button class="btn btn-primary" type="submit">Simpan</button>

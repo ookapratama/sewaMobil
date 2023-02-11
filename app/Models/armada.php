@@ -10,6 +10,7 @@ class Armada extends Model
     use HasFactory;
 
     protected $fillable = [
+        'driver_id',
         'name',
         'price',
         'plat',
@@ -27,6 +28,10 @@ class Armada extends Model
     public function getUser() {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
+
+    // public function driver() {
+    //     return $this->hasOne(::class, 'driver_id', 'id');
+    // }
 
 
 }

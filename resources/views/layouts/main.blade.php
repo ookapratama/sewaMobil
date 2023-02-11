@@ -38,7 +38,7 @@
 
     @yield('container')
     {{-- {{ dd($title != 'User Profile') }} --}}
-    @if ($title != 'User Profile')
+    @if ($title != 'User Profile' && $title != 'User Transaction' && $title != 'User Invoice')
         @include('partials.footer')
     @endif
     

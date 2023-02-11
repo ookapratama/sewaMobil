@@ -60,7 +60,7 @@
                             </ul>
                         </div>
                         <div class="text-center">
-                            <a href="/profile"><u class="text">View in my profile</u></a>
+                            <a href="{{ route('user-profile', ['id1' => $id_user, 'id2' => $id_trans]) }}"><u class="text">View in my profile</u></a>
                         </div>
                         <div class="text-center">
                             <a>Pertanyaan lebih lanjut hubungi admin</a> <a href="https://wa.me/085247768054">(Chat Now)</a>

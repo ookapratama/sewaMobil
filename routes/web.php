@@ -58,7 +58,9 @@ Route::post('/print_payment/{id1}', [TransactionController::class, 'print_paymen
 //     ]);
 // });
 
-Route::get('/profile', [ProfileController::class, 'profile'])->name('user-profile');
+Route::get('/profile/{id1}/{id2}', [ProfileController::class, 'profile'])->name('user-profile');
+Route::get('/transaksi/{id}', [ProfileController::class, 'transaksi'])->name('user-transaksi');
+Route::get('/invoice/{id}', [ProfileController::class, 'invoice'])->name('user-invoice');
 
 
 Route::get('/user-transaction', function () {
