@@ -20,13 +20,8 @@
                                 </div>
                             </div>
                         </aside>
-                        <nav class="list-group">
-                            <a class="list-group-item" href="/user-profile"><i class=""></i>Profile</a>
-                            <a class="list-group-item" href="/user-transaction"><i class=""></i>Transaksi</a>
-                            <a class="list-group-item active" href="/user-invoice"><i class="fa fa-map"></i>Invoice</a>
-                            <a class="list-group-item" href="/"><i class=""></i>Logout</a>
+                        @include('nav-profile')
 
-                        </nav>
                     </div>
                     <div class="col-lg-8 border">
                         <div class="padding-top-2x mt-2 hidden-lg-up"></div>
@@ -49,8 +44,10 @@
                                                     <strong>{{ $invoice->status }}</strong>
                                                 </h4>
                                             @endif --}}
-                                            <p> #Invoice Id</p>{{-- <p>{{ __('invoices::invoice.serial') }} <strong>{{ $invoice->getSerialNumber() }}</strong></p> --}}
-                                            <p> Invoice Date</p>{{-- <p>{{ __('invoices::invoice.date') }}: <strong>{{ $invoice->getDate() }}</strong></p> --}}
+                                            <p> Invoice ID : {{ $trans['bookingcode'] }} </p>{{-- <p>{{ __('invoices::invoice.serial') }} <strong>{{ $invoice->getSerialNumber() }}</strong></p> --}}
+                                            <p>
+                                                {{ $trans['created_at'] }}
+                                            </p>{{-- <p>{{ __('invoices::invoice.date') }}: <strong>{{ $invoice->getDate() }}</strong></p> --}}
                                         </td>
                                     </tr>
                                 </tbody>
@@ -119,14 +116,14 @@
                                                 </p>
                                             @endif --}}
                                             <p> <strong> Kepada</strong></p>
-                                            <p> Septi Intan Amalia</p>
+                                            <p> {{ $trans->fullname }} </p>
 
                                             {{-- @if ($invoice->buyer->address)
                                                 <p class="buyer-address">
                                                     {{ __('invoices::invoice.address') }}: {{ $invoice->buyer->address }}
                                                 </p>
                                             @endif --}}
-                                            <p> Jalan Andi Tonro IV No.20</p>
+                                            <p> {{ $trans->alamat }} </p>
 
 
                                             {{-- @if ($invoice->buyer->phone)
@@ -134,7 +131,7 @@
                                                     {{ __('invoices::invoice.phone') }}: {{ $invoice->buyer->phone }}
                                                 </p>
                                             @endif --}}
-                                            <p> 085298201812</p>
+                                            <p> {{ $trans->no_telp }} </p>
 
                                             {{--
                                             @foreach ($invoice->buyer->custom_fields as $key => $value)
@@ -169,17 +166,17 @@
                                     {{-- Items --}}
                                     {{-- @foreach ($invoice->items as $item) --}}
                                     <tr>
-                                        <td class="pl-0"> Mobil A
+                                        <td class="pl-0"> {{ $trans->armada->name }}
                                             {{-- {{ $item->title }} --}}
                                         </td>
                                         <td class="text-center">
-                                            3 Hari
+                                            {{ $trans->durasi_sewa }} Hari
                                         </td>
                                         <td class="text-center">
-                                            Rp. 400.000
+                                            Rp. {{ number_format($trans->armada->price , 0, ',', '.') }}
                                         </td>
                                         <td class="text-right">
-                                            Rp. 1.200.000
+                                            Rp. {{ number_format($trans->total, 0, ',', '.') }}
                                         </td>
                                     </tr>
                                     {{-- @endforeach --}}
@@ -187,7 +184,7 @@
                                         <td class="pl-0"> Total Pembayaran</td>
                                         <td></td>
                                         <td></td>
-                                        <td class="text-right"> <strong> Rp. 1.200.000 </strong></td>
+                                        <td class="text-right"> <strong> Rp. {{ number_format($trans->total, 0, ',', '.') }} </strong></td>
                                         {{-- {{ $invoice->formatCurrency($invoice->total_amount) }} --}}
                                         </td>
                                     </tr>
@@ -204,4 +201,4 @@
 
 
         </section>
-@endsection
+    @endsection

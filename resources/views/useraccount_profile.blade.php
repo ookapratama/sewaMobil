@@ -19,12 +19,8 @@
                                 </div>
                             </div>
                         </aside>
-                        <nav class="list-group">
-                            <a class="list-group-item active" href="{{ route('user-profile', ['id1' => $user, 'id2' => $trans])}}"><i class=" fa fa-th"></i>Profile</a>
-                            <a class="list-group-item" href="{{ route('user-transaksi', $trans)}}"><i class="fa fa-user"></i>Transaksi</a>
-                            <a class="list-group-item" href="/user-invoice"><i class="fa fa-map"></i>Invoice</a>
-                            <a class="list-group-item" href="/"><i class=""></i>Logout</a>
-                        </nav>
+                        {{-- {{ dd($id_trans) }} --}}
+                        @include('nav-profile')
                     </div>
                     <div class="col-xl-8">
                         <div class="card">

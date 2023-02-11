@@ -29,7 +29,7 @@
                         <h3 class="my-5 mx-5" style="text-align: center">Thank for your Purchase</h3>
                         <ul class="list-unstyled">
                             <li class="text-black">Septi Intan</li>
-                            <li class="text-muted mt-1"><span class="text-black">Invoice</span> #12345</li>
+                            <li class="text-muted mt-1"><span class="text-black">Invoice</span> {{ $trans['bookingcode'] }} </li>
                             <li class="text-black mt-1">{{ $time }}</li>
                         </ul>
                         <div class="card-body">

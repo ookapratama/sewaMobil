@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone');
             $table->enum('status', ['available','booked'])-> default('available');
-            $table->foreignId('transaction_id')->default('1');
+            $table->foreignId('transaction_id')->nullable();
             $table->timestamps();
 
         });

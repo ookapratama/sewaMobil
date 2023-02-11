@@ -18,7 +18,7 @@
                                             <input type="hidden" name="id" value="{{ $transaksi->id }}">
                                             <input type="hidden" name="armada_id" value="{{ $transaksi->armada->id }}">
                                             <th>ID Transaction</th>
-                                            <td><b> 00{{ $transaksi->id }} </b></td>
+                                            <td><b> {{ $transaksi->bookingcode }} </b></td>
                                         </tr>
                                         <tr>
                                             <th>Nama </th>
@@ -81,7 +81,8 @@
                                 height="375" type="">
                             {{-- <embed src="{{ Storage::url($transaction->additional) }}" width="500" height="375" type="application/jpeg"> --}}
                         </div>
-                        <button class="btn btn-primary" type="submit">Approved Pembayaran</button>
+                        <button class="btn btn-primary" value="success" name="btn" type="submit">Approved Pembayaran</button>
+                        <button class="btn btn-success" value="completed" name="btn" type="submit">Completed Transaction</button>
 
                         </form>
                         {{-- click approved (status transaksi berubah dari pending -> success ) --}}

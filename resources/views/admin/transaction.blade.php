@@ -51,8 +51,8 @@
                                                 <i class="bi bi-pencil-square"></i>
                                             </button>
                                             <a href="{{ route('transaksi.detail', $data->id) }}"
-                                                class="btn  btn-{{ $data->status == 'success' ? 'success disabled' : 'warning'}}">
-                                                {{ $data->status == 'success' ? 'Sudah dibayar' : 'Proses bayar'}}
+                                                class="btn  btn-{{ ($data->status == 'success') ? 'success disabled' : (($data->status == 'completed') ? 'success disabled' : 'warning')}}">
+                                                {{ ($data->status == 'success') ? 'Sudah dibayar' : (($data->status == 'completed') ? 'Pembayaran Selesai' : 'Proses Dibayar')}}
                                             </a>
                                         </div>
                                     </td>

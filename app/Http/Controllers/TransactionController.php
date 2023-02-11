@@ -113,11 +113,18 @@ class TransactionController extends Controller
      */
     public function update(UpdatetransactionRequest $request)
     {
+        // dd($request);
         $find = transaction::find($request->id);
         $find_armada = Armada::find($request->armada_id);
         $data = $request->all();
+
         $find_armada['status'] = 'booked';
-        $find['status'] = 'success';
+
+        if ($request->btn == 'booked') {
+            $find['status'] = 'success';
+        } else {
+            $find['status'] = 'completed';
+        }
 
         $find_armada->update($data);
         $find->update($data);
@@ -206,8 +213,8 @@ class TransactionController extends Controller
 
         $data['ktp'] = $namaKtp;
         $data['sim'] = $namaSim;
-        $biaya = 0;
 
+        $biaya = 0;
         if ($data['biaya_antar'] == 'utara') {
             $biaya = 20000;
         } else if ($data['biaya_antar'] == 'timur' || $data['biaya_antar'] == 'tengah' || $data['biaya_antar'] == 'barat') {
@@ -270,16 +277,17 @@ class TransactionController extends Controller
 
         return view('finish_order', [
             // 'data' => $data,
-            'title' => 'Order Complete', 
-            'armada' => $armada1, 
-            'total' => $total, 
-            'price' => $price, 
-            'biaya_antar' => $biaya_antar, 
+            'title' => 'Order Complete',
+            'armada' => $armada1,
+            'total' => $total,
+            'price' => $price,
+            'biaya_antar' => $biaya_antar,
             'durasi_sewa' => $durasi_sewa,
-            'time'  => $tgl_skrg,
+            'time' => $tgl_skrg,
             'id_user' => $id_user,
-            'id_trans' => $request->id_trans
-        ] );
+            'id_trans' => $request->id_trans,
+            'trans' => $find,
+        ]);
 
     }
 
@@ -296,31 +304,33 @@ class TransactionController extends Controller
         $data1 = $request->all();
         // dd($request->id_trans);
 
-        $d = array (
+        $d = array(
             'title' => 'Bukti',
             'data' => $data1,
-            
+
         );
-        $customPaper = array(0,0,400,500);
+        $customPaper = array(0, 0, 400, 500);
         // dd($d);
         $pdf = PDF::loadview('bukti', [
             'data' => $data1,
-            'title' => $tes, 
-            'armada' => $armada1, 
-            'total' => $total, 
-            'price' => $price, 
-            'biaya_antar' => $biaya_antar, 
-            'durasi_sewa' => $durasi_sewa, 
-            ])->setPaper($customPaper, 'landscape');
+            'title' => $tes,
+            'armada' => $armada1,
+            'total' => $total,
+            'price' => $price,
+            'biaya_antar' => $biaya_antar,
+            'durasi_sewa' => $durasi_sewa,
+        ])->setPaper($customPaper, 'landscape');
 
-        return $pdf->download($trans->bookingcode.'.pdf');
+        return $pdf->download($trans->bookingcode . '.pdf');
     }
 
-    public function finish_order () {
+    public function finish_order()
+    {
 
     }
 
-    public function view_print () {
+    public function view_print()
+    {
         return view('bukti');
     }
 }
