@@ -154,7 +154,7 @@
                             <div class="mb-3">
                                 <div class="col-md-12">
                                     <label for="address">Plat</label>
-                                    <input name="plat" id="plat_old" type="number" class="form-control" placeholder="Masukan Harga.."
+                                    <input name="plat" id="plat_old" type="text" class="form-control" placeholder="Masukan Plat Kendaraan"
                                         required></input>
                                 </div>
                             </div>

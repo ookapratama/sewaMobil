@@ -109,9 +109,9 @@ class ArmadaController extends Controller
     {
         $data = $request->all();
         $find =  Armada::find($request->id);
-        // dd($request->picture_old);
+        // dd($request->picture_url != $find->picture_url);
         // validasi gambar
-        if ($request->picture_url == $find->picture_url) {
+        if ($request->picture_url != $find->picture_url) {
             
             $nama = time() . '.' . $request->picture_url->extension();
             // dd($nama);
