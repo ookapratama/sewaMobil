@@ -46,8 +46,7 @@
                                         </tr>
                                         <tr>
                                             <th>Total Transaksi</th>
-                                            {{-- total keseluruhan tanpa biaya pengantaran dan supir --}}
-                                            <td> Rp. {{ number_format($transaksi->armada->price, 0, ',', '.') }}</td>
+                                            <td> Rp. {{ number_format($transaksi->total, 0, ',', '.') }}</td>
                                         </tr>
                                         <tr>
                                             <th>KTP</th>
