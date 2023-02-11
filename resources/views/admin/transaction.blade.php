@@ -54,7 +54,7 @@
                                             </button>
                                             {{-- transaksi pending : default (warna warning)
                                                 transaksi success : pembayaran diterima -> armada sudah tidak muncul di katalog (warna success)
-                                                transaksi completed : penyewaan berakhir (warna primary) --}}
+                                                transaksi completed : penyewaan berakhir (warna primary) -> armada kembali jadi available --}}
                                             <a href="{{ route('transaksi.detail', $data->id) }}"
                                                 class="btn  btn-{{ ($data->status == 'success') ? 'success disabled' : (($data->status == 'completed') ? 'success disabled' : 'warning')}}">
                                                 {{ ($data->status == 'success') ? 'Sudah dibayar' : (($data->status == 'completed') ? 'Pembayaran Selesai' : 'Proses Dibayar')}}
