@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.main', ['title' => 'User Profile'])
 
 @section('container')
     <div class="container">
