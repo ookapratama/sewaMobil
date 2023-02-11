@@ -46,19 +46,17 @@
                                         </tr>
                                         <tr>
                                             <th>Total Transaksi</th>
-                                            <td>{{ $transaksi->armada->price }}</td>
+                                            <td> Rp. {{ number_format($transaksi->total, 0, ',', '.') }}</td>
                                         </tr>
                                         <tr>
                                             <th>KTP</th>
+                                            {{-- bagaimana caranya dilihat isinya --}}
                                             <td>{{ $transaksi->ktp }}</td>
                                         </tr>
                                         <tr>
                                             <th>SIM</th>
+                                            {{-- bagaimana caranya dilihat isinya --}}
                                             <td>{{ $transaksi->sim }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Total Pembayaran</th>
-                                            <td>Rp. {{ number_format($transaksi->armada->price, 0, ',', '.') }}</td>
                                         </tr>
                                         <tr>
                                             <th>Status Transaksi</th>
@@ -66,6 +64,12 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                                <div>
+                                    {{-- Approved Pembayaran (Status pending -> success) --}}
+                                    <button class="btn btn-primary" value="success" name="btn" type="submit">Approved Pembayaran</button>
+                                    {{-- Completed Transaction (Status success -> completed) --}}
+                                    <button class="btn btn-success" value="completed" name="btn" type="submit">Completed Transaction</button>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -81,9 +85,14 @@
                                 height="375" type="">
                             {{-- <embed src="{{ Storage::url($transaction->additional) }}" width="500" height="375" type="application/jpeg"> --}}
                         </div>
-                        <button class="btn btn-primary" value="success" name="btn" type="submit">Approved Pembayaran</button>
-                        <button class="btn btn-success" value="completed" name="btn" type="submit">Completed Transaction</button>
-
+                        <div class="mb-3 row">
+                            <embed src="{{ asset('image/ktp/' . $transaksi->ktp) }}" width="500"
+                                height="375" type="">
+                        </div>
+                        <div class="mb-3 row">
+                            <embed src="{{ asset('image/sim/' . $transaksi->sim) }}" width="500"
+                                height="375" type="">
+                        </div>
                         </form>
                         {{-- click approved (status transaksi berubah dari pending -> success ) --}}
                     </div>
