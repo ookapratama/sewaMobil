@@ -34,16 +34,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($trans as $item)
+                                        
                                     <tr>
                                         <td>
                                             <div class="product-item">
                                                 <div class="product-info">
-                                                    <h3 class="invoice-id"><a href="#"> <strong> {{ $trans->bookingcode }} </strong> </a>
+
+                                                    <h3 class="invoice-id"><a href="#"> <strong>
+                                                                {{ $item->bookingcode }} </strong> </a>
                                                     </h3>
-                                                    <div class="text-lg text-bold"> {{$trans->armada->name}} </div>
-                                                    <div class="text-lg text-medium text-muted">Rp. {{ number_format($trans->total, 0, ',', '.') }} </div>
+                                                    <div class="text-lg text-bold"> {{ $item->armada->name }} </div>
+                                                    <div class="text-lg text-medium text-muted">Rp.
+                                                        {{ number_format($item->total, 0, ',', '.') }} </div>
                                                     <div>Status:
-                                                        <div class="d-inline text-{{ $trans->status == 'success' ? 'success' : 'warning'}}"> {{ $trans->status }} </div>
+                                                        <div
+                                                            class="d-inline text-{{ $item->status == 'success' ? 'success' : 'warning' }}">
+                                                            {{ $item->status }} </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -52,6 +59,7 @@
                                                 data-toggle="tooltip" title="" data-original-title="Remove item"><i
                                                     class="icon-cross"></i></a></td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -60,4 +68,4 @@
             </div>
 
         </section>
-@endsection
+    @endsection

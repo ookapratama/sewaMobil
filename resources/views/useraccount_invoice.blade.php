@@ -44,9 +44,9 @@
                                                     <strong>{{ $invoice->status }}</strong>
                                                 </h4>
                                             @endif --}}
-                                            <p> Invoice ID : {{ $trans['bookingcode'] }} </p>{{-- <p>{{ __('invoices::invoice.serial') }} <strong>{{ $invoice->getSerialNumber() }}</strong></p> --}}
+                                            <p> Invoice ID : {{ $trans->bookingcode }} </p>{{-- <p>{{ __('invoices::invoice.serial') }} <strong>{{ $invoice->getSerialNumber() }}</strong></p> --}}
                                             <p>
-                                                {{ $trans['created_at'] }}
+                                                {{ $trans->created_at }}
                                             </p>{{-- <p>{{ __('invoices::invoice.date') }}: <strong>{{ $invoice->getDate() }}</strong></p> --}}
                                         </td>
                                     </tr>

@@ -8,9 +8,9 @@ use App\Models\User;
 
 class ProfileController extends Controller
 {
-    public function profile($id_user, $id_trans) {
+    public function profile( $id_user, $id_trans) {
         // dump(transaction::find($id_trans));
-        // dd($id_user);
+        // dd($request->id_trans);
         return view('useraccount_profile', 
         [
             "title" => "User Profile",
@@ -19,9 +19,9 @@ class ProfileController extends Controller
             'id_trans' => $id_trans 
         ]);
     }
-    public function transaksi($id_user,$id_trans) {
+    public function transaksi($id_user, $id_trans) {
         // dd($id);
-        $find = transaction::find($id_trans);
+        $find = transaction::all();
         // dd($find);
         // $trans = $find->sortByDesc('id')->take(1);
         return view('useraccount_transaction', 
