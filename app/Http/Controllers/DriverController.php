@@ -51,6 +51,7 @@ class DriverController extends Controller
             'name' => 'required'
         ]);
         $data = $request->all();
+        // dd($data);
         // $data['status'] = 'booked';
         driver::create($data);
         // dd($request);

@@ -6,8 +6,7 @@
         <div class="oleez-loader"></div>
         <main class="contact-page">
             <div class="container">
-                {{-- <a href="/">back to homepage</a> --}}
-                <h3 class="oleez-page-title wow fadeInUp">Berikan Ulasan anda</h3>
+                <h1 class="oleez-page-title wow fadeInUp">Berikan Ulasan anda</h1>
                 <div class="row">
                     <div class="col-md-6 mb-5 mb-md-0 pr-lg-5 wow fadeInLeft">
                         <div class="embed-responsive">
@@ -32,7 +31,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="message">*Ulasan</label>
+                                <label for="message">*Ulasan Anda</label>
                                 <textarea name="message" id="message" rows="10" class="oleez-textarea" required></textarea>
                             </div>
                             <button type="submit" class="btn btn-submit">Send</button>

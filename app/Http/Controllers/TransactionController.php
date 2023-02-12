@@ -120,10 +120,11 @@ class TransactionController extends Controller
 
         $find_armada['status'] = 'booked';
 
-        if ($request->btn == 'booked') {
+        if ($request->btn == 'success') {
             $find['status'] = 'success';
         } else {
             $find['status'] = 'completed';
+            $find_armada['status'] = 'available';
         }
 
         $find_armada->update($data);
@@ -138,7 +139,7 @@ class TransactionController extends Controller
 
         $find = transaction::find($request->id);
         // dd($request->hasFile('dp_invoice') || $request->hasFile('ktp') || $request->hasFile('sim') );
-        $data = $request->all();
+        // $data = $request->all();
 
         // validasi gambar
         if ($request->hasFile('dp_invoice') || $request->hasFile('ktp') || $request->hasFile('sim')) {

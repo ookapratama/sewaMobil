@@ -30,7 +30,7 @@
                                         <p class="card-title-desc"> {{ ++$i }}</p>
                                     </th>
                                     <th scope="row">
-                                        <img src={{ '/image/cars/' . $data-> picture_url }} alt=""
+                                        <img src={{ '/image/cars/' . $data->picture_url }} alt=""
                                             class="card-img-preview">
                                     </th>
                                     <th><a href="#"> </a>
@@ -86,21 +86,21 @@
                             </div>
                             <div class="mb-3">
                                 <div class="col-md-12">
-                                    <label for="price">Price</label>
+                                    <label for="address">Price</label>
                                     <input name="price" class="form-control" placeholder="Masukan Harga.."
                                         required></input>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <div class="col-md-12">
-                                    <label for="plat">Plat</label>
+                                    <label for="address">Plat</label>
                                     <input name="plat" type="text" class="form-control" placeholder="Masukan Plat.."
                                         required></input>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <div class="col-md-12">
-                                    <label for="transmisi">Transmisi</label>
+                                    <label for="address">Transmisi</label>
                                     <select class="form-control" name="transmission" id="">
                                         <option value="matic">Matic</option>
                                         <option value="manual">Manual</option>
@@ -109,7 +109,7 @@
                             </div>
                             <div class="mb-3">
                                 <div class="col-md-12">
-                                    <label for="picture">Picture</label>
+                                    <label for="email">Picture</label>
                                     <input type="file" name="picture_url" class="form-control"
                                         placeholder="Upload Picture" required>
                                 </div>
@@ -146,21 +146,21 @@
                             </div>
                             <div class="mb-3">
                                 <div class="col-md-12">
-                                    <label for="price">Price</label>
+                                    <label for="address">Price</label>
                                     <input name="price" class="form-control" id="price_old"
                                         placeholder="Masukan Harga.." required></input>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <div class="col-md-12">
-                                    <label for="plat">Plat</label>
-                                    <input name="plat" id="plat_old" type="text" class="form-control" placeholder="Masukan Plat.."
+                                    <label for="address">Plat</label>
+                                    <input name="plat" id="plat_old" type="text" class="form-control" placeholder="Masukan Plat Kendaraan"
                                         required></input>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <div class="col-md-12">
-                                    <label for="transimis">Transmisi</label>
+                                    <label for="address">Transmisi</label>
                                     <select class="form-control" name="transmission" id="trans_old">
                                         <option value="matic">Matic</option>
                                         <option value="manual">Manual</option>
@@ -169,7 +169,7 @@
                             </div>
                             <div class="mb-3">
                                 <div class="col-md-12">
-                                    <label for="picture">Picture</label>
+                                    <label for="email">Picture</label>
                                     <input type="file" name="picture_url" id="picture" class="form-control"
                                         placeholder="Upload Picture" >
                                     <input type="hidden" name="picture_old" id="picture_old">

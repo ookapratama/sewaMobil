@@ -15,7 +15,7 @@
                                         src="/image/classic-portrait-silhouette-man.jpg" alt="User">
                                 </div>
                                 <div class="user-data">
-                                    <h4> Nama Pelanggan </h4>
+                                    <h4> Akun anda </h4>
                                 </div>
                             </div>
                         </aside>

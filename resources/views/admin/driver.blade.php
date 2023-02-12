@@ -34,29 +34,12 @@
                                     <td><span> {{ $driver->name }} </span></td>
                                     <td>{{ $driver->phone }}</td>
                                     <td>
-                                        <button class="btn btn-{{ $driver->status == 'available' ? 'primary' : 'secondary'}}">{{ $driver->status }}</button>
-                                        {{-- <button type="button" class="btn btn-success rounded-pill" data-bs-toggle="modal" data-bs-target="#verticalycentered"> Available </button>
-                            <div class="modal fade" id="verticalycentered" tabindex="-1">
-                                <div class="modal-dialog modal-dialog-centered">
-                                   <div class="modal-content">
-                                      <div class="modal-header">
-                                         <h5 class="modal-title">Input Car Name</h5>
-                                         <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
-                                    </div>
-                                    <form>
-                                        <div class="row mb-3 mt-3">
-                                           <label for="inputText" class="col-sm-1 col-form-label"></label>
-                                           <div class="col-sm-10"> <input type="text" class="form-control"></div>
-                                        </div>
-                                    </form>
-                                    <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> <button type="button" class="btn btn-primary">Assign</button></div>
-                                   </div>
-                                </div>
-                            </div> --}}
+                                        <button
+                                            class="btn btn-{{ $driver->status == 'available' ? 'primary' : 'danger' }}">{{ $driver->status }}
+                                        </button>
                                     </td>
                                     <td>
                                         <div class="d-flex">
-
                                             <form class="me-2" action="{{ route('driver.destroy', $driver->id) }} "
                                                 method="post">
                                                 {{ method_field('delete') }}
@@ -73,7 +56,15 @@
                                     </td>
                                 </tr>
                             @endforeach
-
+                            {{-- <tr>
+                        <th scope="row">#2457</a></th>
+                        <td><span>Driver 2 </span></td>
+                        <td>08325464323</td>
+                        <td>
+                            <button type="button" class="btn btn-warning rounded-pill" data-bs-toggle="tooltip" data-bs-placement="right" title="Finish?"> Assigned </button>
+                        </td>
+                        <td>Fortuner 4x4</td>
+                    </tr> --}}
                         </tbody>
                     </table>
                 </div>
@@ -99,16 +90,26 @@
                                         placeholder="Masukan Nama Driver.." required>
                                 </div>
                             </div>
-                            <div class="mb-3">
+                            {{-- armada option --}}
+                            {{-- <div class="mb-3">
                                 <div class="col-md-12">
                                     <label for="name">Armada</label>
                                     <select class="form-control" name="armada_id" id="">
                                         <option value="">Pilih Armada</option>
                                         @foreach ($armada as $item)
-
-                                        <option value="{{ $item->id }} "> {{ $item->name }} </option>
+                                            <option value="{{ $item->id }} "> {{ $item->name }} </option>
                                         @endforeach
 
+                                    </select>
+                                </div>
+                            </div> --}}
+                            <div class="mb-3">
+                                <div class="col-md-12">
+                                    <label for="name">Status</label>
+                                    <select class="form-control" name="status" id="">
+                                        <option value="">Pilih Status</option>
+                                        <option value="available">Available</option>
+                                        <option value="booked">Booked</option>
                                     </select>
                                 </div>
                             </div>
@@ -119,7 +120,7 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" value="booked" name="status">
+                        {{-- <input type="hidden" value="booked" name="status"> --}}
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
                             <button class="btn btn-primary" type="submit">Simpan</button>
@@ -153,21 +154,33 @@
                             </div>
                             <div class="mb-3">
                                 <div class="col-md-12">
+                                    <label for="name">Armada</label>
+                                    <select class="form-control" name="armada_id" id="">
+                                        <option value="">Pilih Armada</option>
+                                        @foreach ($armada as $item)
+                                            <option value="{{ $item->id }} "> {{ $item->name }} </option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="col-md-12">
+                                    <label for="name">Status</label>
+                                    <select class="form-control" name="status" id="">
+                                        <option value="">Pilih Status</option>
+                                        <option value="available">Available</option>
+                                        <option value="booked">Booked</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="col-md-12">
                                     <label for="address">Phone Number</label>
                                     <input name="phone" class="form-control" id="phone_old" placeholder="08xx..."
                                         required></input>
                                 </div>
                             </div>
-                            {{-- <div class="mb-3">
-                                <div class="col-md-12">
-                                    <label for="address">Status</label>
-                                    <select class="form-control" name="status" id="status_old">
-                                        <option value="matic">Available</option>
-                                        <option value="manual">Booked</option>
-                                    </select>
-                                </div>
-                            </div> --}}
-
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>

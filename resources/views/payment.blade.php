@@ -100,7 +100,7 @@
                                             {{ number_format($total / 2, 0, ',', '.') }}</span></li>
                                     <span class="text-muted small">*Total DP 50% dari Total Penyewaan Mobil </span>
                                 </ul>
-                                <button type="submit" class="btn btn-primary">print</button>
+                                <button type="submit" class="btn btn-primary">print bukti</button>
 
                     </form>
                 </div>

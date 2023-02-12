@@ -34,12 +34,11 @@
                     <li class="nav-item">
                         @if (session()->has('username'))
                             <div class="d-flex">
-                                <p class="mt-2 ms-2">
 
+                                <a href="{{ route('user-profile', ['id1' => Session()->get('id', ''), 'id2' => '1']) }} " class="mt-2 ms-2">
                                     Welcome, {{ Session()->get('username', '') }}
                                     {{-- Welcome,{{ Session()->get('id', '') }} --}}
-                                    {{-- kalo klik username, pindah ke halaman user profile--}}
-                                </p>
+                                </a>
                                 <a class="nav-item btn btn-primary text-white tombol ml-5" href="{{ route('logout') }}"
                                     role="button">Logout</a>
                             </div>

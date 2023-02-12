@@ -20,7 +20,7 @@
                         <p class="product-price"> Rp. {{ number_format($data->price, 0, ',', '.') }} </p>
                         <div class="btn-wrapper">
                             {{-- <a href="{{ route('checkout', Session()->get('id', '')) }} "  --}}
-                            <a href="{{ route('checkout', $data->id )}}"
+                            <a href="{{ route('checkout', $data->id )}}" 
                                 class="btn {{ Session()->get('username') == "" ? 'disabled' : '' }} btn-add-to-cart">
                                 Pesan</a>
                         </div>
@@ -51,6 +51,8 @@
 
                             <div class="mb-6">
                                 <label for="armada_id" class="col-sm-3 col-form-label">Armada</label>
+
+
                                 <div class="col-sm-12">
                                     <select name="armada_id" class="form-control selectx">
                                         <option value=""> Pilih Armada </option>
