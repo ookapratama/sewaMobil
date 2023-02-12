@@ -35,8 +35,30 @@
                                     <td>{{ $driver->phone }}</td>
                                     <td>
                                         <button
+<<<<<<< HEAD
                                             class="btn btn-{{ $driver->status == 'available' ? 'primary' : 'danger' }}">{{ $driver->status }}
                                         </button>
+=======
+                                            class="btn btn-{{ $driver->status == 'available' ? 'primary' : 'secondary' }}">{{ $driver->status }}</button>
+                                        {{-- <button type="button" class="btn btn-success rounded-pill" data-bs-toggle="modal" data-bs-target="#verticalycentered"> Available </button>
+                            <div class="modal fade" id="verticalycentered" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                   <div class="modal-content">
+                                      <div class="modal-header">
+                                         <h5 class="modal-title">Input Car Name</h5>
+                                         <button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
+                                    </div>
+                                    <form>
+                                        <div class="row mb-3 mt-3">
+                                           <label for="inputText" class="col-sm-1 col-form-label"></label>
+                                           <div class="col-sm-10"> <input type="text" class="form-control"></div>
+                                        </div>
+                                    </form>
+                                    <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> <button type="button" class="btn btn-primary">Assign</button></div>
+                                   </div>
+                                </div>
+                            </div> --}}
+>>>>>>> d29aa30f4c57e4d03c42b89d84dd342554d1dab5
                                     </td>
                                     <td>
                                         <div class="d-flex">
@@ -102,7 +124,11 @@
 
                                     </select>
                                 </div>
+<<<<<<< HEAD
                             </div> --}}
+=======
+                            </div>
+>>>>>>> d29aa30f4c57e4d03c42b89d84dd342554d1dab5
                             <div class="mb-3">
                                 <div class="col-md-12">
                                     <label for="name">Status</label>

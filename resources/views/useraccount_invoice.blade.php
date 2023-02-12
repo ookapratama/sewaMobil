@@ -38,10 +38,22 @@
                                         </td>
                                         <td class="border-0 pl-0">
                                             <h4 class="text-uppercase cool-gray"> Invoice Status</h4>
+<<<<<<< HEAD
                                             <p> Invoice ID : {{ $trans->bookingcode }} </p>
                                             <p>
                                                 {{ $trans->created_at }}
                                             </p>
+=======
+                                            {{-- @if ($invoice->status)
+                                                <h4 class="text-uppercase cool-gray">
+                                                    <strong>{{ $invoice->status }}</strong>
+                                                </h4>
+                                            @endif --}}
+                                            <p> Invoice ID : {{ $trans->bookingcode }} </p>{{-- <p>{{ __('invoices::invoice.serial') }} <strong>{{ $invoice->getSerialNumber() }}</strong></p> --}}
+                                            <p>
+                                                {{ $trans->created_at }}
+                                            </p>{{-- <p>{{ __('invoices::invoice.date') }}: <strong>{{ $invoice->getDate() }}</strong></p> --}}
+>>>>>>> d29aa30f4c57e4d03c42b89d84dd342554d1dab5
                                         </td>
                                     </tr>
                                 </tbody>

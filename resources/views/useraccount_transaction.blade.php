@@ -35,7 +35,11 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($trans as $item)
+<<<<<<< HEAD
 
+=======
+                                        
+>>>>>>> d29aa30f4c57e4d03c42b89d84dd342554d1dab5
                                     <tr>
                                         <td>
                                             <div class="product-item">
@@ -49,7 +53,11 @@
                                                         {{ number_format($item->total, 0, ',', '.') }} </div>
                                                     <div>Status:
                                                         <div
+<<<<<<< HEAD
                                                             class="d-inline text-{{ $item->status == 'success' ? 'success' : 'danger' }}">
+=======
+                                                            class="d-inline text-{{ $item->status == 'success' ? 'success' : 'warning' }}">
+>>>>>>> d29aa30f4c57e4d03c42b89d84dd342554d1dab5
                                                             {{ $item->status }} </div>
                                                     </div>
                                                 </div>
