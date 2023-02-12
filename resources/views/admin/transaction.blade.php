@@ -82,7 +82,7 @@
                     {{-- <form action="{{ route('transaction.store') }}" method="post"> --}}
                     <form action="{{ route('transaksi.admin.update') }} " id="editForm" method="post"
                         enctype="multipart/form-data">
-                        @method('put')
+                        @method('PUT')
                         @csrf
                         <input type="hidden" name="id" id="id">
                         <div class="modal-body">
