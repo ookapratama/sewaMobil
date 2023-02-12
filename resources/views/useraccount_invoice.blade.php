@@ -24,11 +24,10 @@
 
                     </div>
                     <div class="col-lg-8 border">
-                        @foreach ($invoice as $item)
 
-                        @endforeach
 
-                            <div class="padding-top-2x mt-2 hidden-lg-up"></div>
+                        <div class="padding-top-2x mt-2 hidden-lg-up"></div>
+                        @foreach ($trans as $item)
                             <!-- Invoice -->
 
                             <body>
@@ -121,8 +120,10 @@
                                 </table>
                                 <p> *Pembayaran Max Hari Pengambilan Armada</p>
                             </body>
-                            
-                        </div>
+                        @endforeach
+
+
+                    </div>
                 </div>
             </div>
         </section>

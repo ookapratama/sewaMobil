@@ -101,11 +101,13 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\useraccount  $useraccount
+     * @param  \App\Models\user  $useraccount
      * @return \Illuminate\Http\Response
      */
-    public function destroy(useraccount $useraccount)
+    public function destroy($id)
     {
-        //
+        $find = user::find($id);
+        $find->delete();
+        return redirect()->route('user.index');  
     }
 }

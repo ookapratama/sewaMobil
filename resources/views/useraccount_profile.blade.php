@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="container">
-
+        {{-- {{ dd($user) }} --}}
         <section>
             <div class="container padding-bottom-3x mb-2">
                 <div class="row">

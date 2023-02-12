@@ -35,30 +35,29 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($trans as $item)
-                                        
-                                    <tr>
-                                        <td>
-                                            <div class="product-item">
-                                                <div class="product-info">
+                                        <tr>
+                                            <td>
+                                                <div class="product-item">
+                                                    <div class="product-info">
 
-                                                    <h3 class="invoice-id"><a href="#"> <strong>
-                                                                {{ $item->bookingcode }} </strong> </a>
-                                                    </h3>
-                                                    <div class="text-lg text-bold"> {{ $item->armada->name }} </div>
-                                                    <div class="text-lg text-medium text-muted">Rp.
-                                                        {{ number_format($item->total, 0, ',', '.') }} </div>
-                                                    <div>Status:
-                                                        <div
-                                                            class="d-inline text-{{ $item->status == 'success' ? 'success' : 'warning' }}">
-                                                            {{ $item->status }} </div>
+                                                        <h3 class="invoice-id"><a href="#"> <strong>
+                                                                    {{ $item->bookingcode }} </strong> </a>
+                                                        </h3>
+                                                        <div class="text-lg text-bold"> {{ $item->armada->name }} </div>
+                                                        <div class="text-lg text-medium text-muted">Rp.
+                                                            {{ number_format($item->total, 0, ',', '.') }} </div>
+                                                        <div>Status:
+                                                            <div
+                                                                class="d-inline text-{{ $item->status == 'success' ? 'success' : 'warning' }}">
+                                                                {{ $item->status }} </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-center"><a class="remove-from-cart" href="#"
-                                                data-toggle="tooltip" title="" data-original-title="Remove item"><i
-                                                    class="icon-cross"></i></a></td>
-                                    </tr>
+                                            </td>
+                                            <td class="text-center"><a class="remove-from-cart" href="#"
+                                                    data-toggle="tooltip" title=""
+                                                    data-original-title="Remove item"><i class="icon-cross"></i></a></td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>

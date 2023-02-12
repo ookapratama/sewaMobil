@@ -29,7 +29,7 @@ class User extends Authenticatable
 
     public function trans()
     {
-        return $this->hasOne(transaction::class, 'user_id', 'id');
+        return $this->hasOne(transaction::class, 'id', 'user_id');
     }
 
     public function testimoni()

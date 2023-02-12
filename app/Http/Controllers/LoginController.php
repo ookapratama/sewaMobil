@@ -39,7 +39,8 @@ class LoginController extends Controller
             $id         = $request->session()->put('id', $user->id);
             $username   = $request->session()->put('username', $user->username);
             $nama       = $request->session()->put('email', $user->email);
-            return redirect()->intended(route('home.index'));
+            // dd();
+            return view('home', $user);
         }
 
         
