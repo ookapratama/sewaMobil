@@ -21,7 +21,7 @@ class ProfileController extends Controller
     }
     public function transaksi($id_user, $id_trans) {
         // dd($id);
-        $find = transaction::all();
+        $find = transaction::where('user_id', $id_user)->get();
         // dd($find);
         // $trans = $find->sortByDesc('id')->take(1);
         return view('useraccount_transaction', 

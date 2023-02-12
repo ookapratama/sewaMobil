@@ -53,19 +53,19 @@
                             </div>
                             <div class="col-lg-6">
                                 <label for="formFile" class="form-label">KTP</label>
-                                <input class="form-control" type="file" name="ktp" id="formFile">
+                                <input class="form-control" type="file" name="ktp" id="formFile" required>
                             </div>
                             <div class="col-lg-6">
                                 <label for="formFile" class="form-label">SIM</label>
-                                <input class="form-control" type="file" name="sim" id="formFile">
+                                <input class="form-control" type="file" name="sim" id="formFile" required>
                             </div>
                             <div class="col-lg-6">
                                 <label for="formFile" class="form-label">Start Date</label>
-                                <input class="form-control form-control-lg" name="start_date" type="date" id="formFile">
+                                <input class="form-control form-control-lg" name="start_date" type="date" id="formFile" required>
                             </div>
                             <div class="col-lg-6">
                                 <label for="formFile" class="form-label">End Date</label>
-                                <input class="form-control form-control-lg" name="end_date" type="date" id="formFile">
+                                <input class="form-control form-control-lg" name="end_date" type="date" id="formFile" required>
                             </div>
 
 
