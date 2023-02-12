@@ -155,7 +155,7 @@
                             <div class="mb-3">
                                 <div class="col-md-12">
                                     <label for="name">Armada</label>
-                                    <select class="form-control" name="armada_id" id="">
+                                    <select class="form-control" name="armada_id" id="armada_old">
                                         <option value="">Pilih Armada</option>
                                         @foreach ($armada as $item)
                                             <option value="{{ $item->id }} "> {{ $item->name }} </option>
@@ -167,7 +167,7 @@
                             <div class="mb-3">
                                 <div class="col-md-12">
                                     <label for="name">Status</label>
-                                    <select class="form-control" name="status" id="">
+                                    <select class="form-control" name="status" id="status_old">
                                         <option value="">Pilih Status</option>
                                         <option value="available">Available</option>
                                         <option value="booked">Booked</option>
@@ -211,6 +211,8 @@
                         console.log(response.driver.name);
                         $('#name_old').val(response.driver.name);
                         $('#phone_old').val(response.driver.phone);
+                        $('#status_old').val(response.driver.status);
+                        // $('#armada_old').val(response.driver.armada_id);
                         $('#id').val(id);
                     }
                 });
