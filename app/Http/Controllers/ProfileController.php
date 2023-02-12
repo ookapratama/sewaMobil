@@ -36,13 +36,14 @@ class ProfileController extends Controller
     public function invoice($id_user, $id_trans) {
         // dd($id_trans);
         $find = transaction::find($id_trans);
-
+        $inv = transaction::all();
         return view('useraccount_invoice', 
         [
             "title" => "User Invoice",
             "trans"  => $find,
             "id_trans"  => $id_trans,
             "user"  => User::find($id_user),
+            'invoice' => $inv
         ]);
     }
 }
